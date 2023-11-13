@@ -55,13 +55,13 @@ We see how temperature seems to affect surface tension, which makes sense since 
 By constructing hollow objects we can see a buoyancy-like force appear. We also vary the mass of the rigid body in order to probe how mass is related to the buoyancy force.
 
 <div class="row align-items-center">
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![circle in water](circle.gif){: .center w="400" h="400" }
 </div>
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![box in water](box.gif){: .center w="400" h="400" }
 </div>
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![sunk box in water](sunk.gif){: .center w="400" h="400" }
 </div>
 </div>

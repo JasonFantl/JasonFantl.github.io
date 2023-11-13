@@ -1,66 +1,78 @@
-
 <style>
-.link-section {
-  display: flex;
-  justify-content: space-around;
-  gap: 10px; /* Adjust the gap as needed for spacing */
-  margin-bottom: 20px;
-}
+    .link-section {
+        display: flex;
+        justify-content: space-around;
+        gap: 10px;
+        /* Adjust the gap as needed for spacing */
+        margin-bottom: 20px;
+    }
 
-.image-link {
-  position: relative;
-  text-decoration: none;
-  color: #333;
-  text-align: center;
-  overflow: hidden;
-}
+    .image-link {
+        position: relative;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        overflow: visible;
+        padding: 10px;
+        /* Increase padding as needed */
+        margin: 5px;
+        /* Adjust margin if you want more space outside the links */
+        box-sizing: border-box;
+        /* Ensures padding is included in width/height */
+    }
 
-.image-link img {
-  max-width: 100%;
-  height: 150px; /* Set a fixed height for all images */
-  height: 150px; /* Set a fixed height for all images */
-  object-fit: cover; /* Ensure images maintain aspect ratio within the fixed height */
-  border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-}
+    .image-link img {
+        max-width: 100%;
+        height: 150px;
+        /* Set a fixed height for all images */
+        /* Set a fixed height for all images */
+        object-fit: cover;
+        /* Ensure images maintain aspect ratio within the fixed height */
+        border-radius: 8px;
+        transition: transform 0.3s ease-in-out;
+    }
 
-.image-link:hover img {
-  transform: scale(1.1);
-}
+    .image-link:hover img {
+        transform: scale(1.1);
+    }
 
-.image-link {
-  position: relative;
-  text-decoration: none;
-  color: #333;
-  text-align: center;
-  overflow: hidden;
-}
+    .image-link {
+        position: relative;
+        text-decoration: none;
+        color: #333;
+        text-align: center;
+        overflow: hidden;
+    }
 
-.image-text {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-in-out;
-  color: #ffffff; /* Text color */
-  font-size: 14px;
-  font-weight: bold;
-  pointer-events: none;
-  line-height: 1.2;
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1);
+    .image-text {
+        display: inline;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease-in-out;
+        color: #ffffff;
+        /* Text color */
+        font-size: 14px;
+        font-weight: bold;
+        pointer-events: none;
+        line-height: 1.2;
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1);
 
-}
+    }
 
-.overlay-link {
-  color: inherit; /* Use the same color as the text */
-  text-decoration: none;
-}
+    .overlay-link {
+        color: inherit;
+        /* Use the same color as the text */
+        text-decoration: none;
+    }
 
-.image-link:hover .image-text {
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 1); /* Adjust shadow size and color on hover */
+    .image-link:hover .image-text {
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
+        /* Adjust shadow size and color on hover */
 
-}
+    }
 </style>
 
 ----------------------
@@ -68,13 +80,18 @@
 #### Blog
 <div class="link-section">
 
-<a href="{% post_url 2023-08-7-Decentralized-Dynamic-Cluster-Identification %}" class="image-link"><span class="image-text">Dynamic Cluster Identification</span><img src="cluster.png" alt="Dynamic Cluster Identification"></a>
+    <a href="{% post_url 2023-08-7-Decentralized-Dynamic-Cluster-Identification %}" class="image-link"><span
+            class="image-text">Dynamic Cluster Identification</span><img src="cluster.png"
+            alt="Dynamic Cluster Identification"></a>
 
-<a href="{% post_url 2023-04-07-Simulated-Economy-(1) %}" class="image-link"><span class="image-text">Simulating an Economy</span><img src="economy.png" alt="Simulating an Economy"></a>
+    <a href="{% post_url 2023-04-07-Simulated-Economy-(1) %}" class="image-link"><span class="image-text">Simulating an
+            Economy</span><img src="economy.png" alt="Simulating an Economy"></a>
 
-<a href="{% post_url 2023-04-09-Non-Euclidian-Renderer %}" class="image-link"><span class="image-text">Non-Euclidean Renderer</span><img src="blackhole.gif" alt="Non-Euclidean Renderer"></a>
+    <a href="{% post_url 2023-04-09-Non-Euclidian-Renderer %}" class="image-link"><span class="image-text">Non-Euclidean
+            Renderer</span><img src="blackhole.gif" alt="Non-Euclidean Renderer"></a>
 
-<a href="{% post_url 2023-04-08-Ants-Internet %}" class="image-link"><span class="image-text">Ants and the Internet</span><img src="ants.png" alt="Ants and the Internet"></a>
+    <a href="{% post_url 2023-04-08-Shaping-Swarms %}" class="image-link"><span class="image-text">Shaping Swarms in
+            Simulation</span><img src="swarm.gif" alt="Shaping Swarms in Simulation"></a>
 </div>
 
 ----------------------
@@ -82,9 +99,14 @@
 #### Github
 
 <div class="link-section">
-<a href="https://github.com/JasonFantl/Drone-hand-controller" class="image-link"><span class="image-text">Controlling drones with hand rotation</span><img src="drone.png" alt="Controlling drones with hand motions"></a>
+    <a href="https://github.com/JasonFantl/Drone-hand-controller" class="image-link"><span
+            class="image-text">Controlling drones with hand rotation</span><img src="drone.png"
+            alt="Controlling drones with hand motions"></a>
 
-<a href="https://github.com/JasonFantl/VR-Lenia" class="image-link"><span class="image-text">Lenia in VR: Continuous 3D cellular automata</span><img src="lenia.png" alt="Lenia in VR: Continuous 3D cellular automata"></a>
+    <a href="https://github.com/JasonFantl/VR-Lenia" class="image-link"><span class="image-text">Lenia in VR: Continuous
+            3D cellular automata</span><img src="lenia.png" alt="Lenia in VR: Continuous 3D cellular automata"></a>
 
-<a href="https://github.com/JasonFantl/Lambda-calculus-interpreter" class="image-link"><span class="image-text">Lambda Calculus shell interpreter</span><img src="lambda.jpg" alt="Lambda Calculus shell interpreter"></a>
+    <a href="https://github.com/JasonFantl/Lambda-calculus-interpreter" class="image-link"><span
+            class="image-text">Lambda Calculus shell interpreter</span><img src="lambda.jpg"
+            alt="Lambda Calculus shell interpreter"></a>
 </div>

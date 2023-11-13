@@ -21,10 +21,10 @@ Or if you look at Asteroids, where you can go off the top of the screen to appea
 But it's not just games, our universe is non-Euclidean! It turns out that mass bends space and time itself (but let's just focus on the space bit), so that with large enough masses we can create [gravitational lenses](https://en.wikipedia.org/wiki/Gravitational_lens), or detect the collision of black holes by measuring the bending of space from the resulting [gravitational waves](https://en.wikipedia.org/wiki/Gravitational_wave). 
 
 <div class="row align-items-center">
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4 mx-auto" markdown="1">
 ![blackhole](blackhole.gif){: w="200" }
 </div>
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4 mx-auto" markdown="1">
 ![bent space](bent_space.gif){: w="200" }
 </div>
 </div>
@@ -78,13 +78,13 @@ We see a repeated universe in all directions, an infinite (single?) number of ou
 The following are the Mobius strip, the Klein Bottle, and the Sphere.
 
 <div class="row align-items-center">
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4 mx-auto" markdown="1">
 ![mobius strip](mobius_POV.gif){: w="300" }
 </div>
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4 mx-auto" markdown="1">
 ![klein bottle](klein_POV.gif){: w="300" }
 </div>
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-4 mx-auto" markdown="1">
 ![sphere](sphere_POV.gif){: w="300" }
 </div>
 </div>

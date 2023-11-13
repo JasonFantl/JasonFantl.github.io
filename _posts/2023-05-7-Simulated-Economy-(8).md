@@ -32,7 +32,7 @@ All future differential equations can be easily converted into code similar to t
 
 We see here what that population would look like, an exploding number of rabbits in a short period of time (an exponential).
 </div>
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 ![Exponential line](exponential.gif){: .right w="400" }
 </div>
 </div>
@@ -45,7 +45,7 @@ Real rabbits cannot reproduce forever, eventually they run out of room or resour
 
 For $R<K$ the change is positive, so the same behavior as before. For $R>K$ the change becomes negative, which means the population will decrease. And so the population always moves towards the carrying capacity.
 </div>
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 ![Exponential line with capacity](capacity.gif){: .right w="400" }
 </div>
 </div>
@@ -95,7 +95,7 @@ If you plot the path of the point in phase space in three dimensions, you would 
 
 This is known as the [Rössler attractor](https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor), and it's far from the strangest shape that we can build.
 </div>
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 ![Rossler Attractor 3D](RosslerAttractor3D.png){: .center h="400" }
 </div>
 </div>
@@ -108,7 +108,7 @@ By introducing this third variable we are thrust into the world of [chaos theory
 
 Like with our foxes and rabbits, we can trace a point in phase space according to a set of differential equations. Here we see the continuous 3D chaotic Aizawa attractor.
 </div>
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 ![Aizawa attractor](spherish_attractor.png){: .center w="600" h="600" }
 </div>
 </div>
@@ -119,7 +119,7 @@ Note that it is necessary to have at least three dimensions for continuous chaot
 
 Our fox-rabbit-grass simulation is discrete since it's simulated on a computer run by a clock. There's nothing stopping us from using a discrete model for our populations (other then trying to fabric a feasible justification for the equations).
 </div>
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 ![Tinkerbell attractor](tinkerbell_attractor.png){: .center w="600" h="600" }
 </div>
 </div>

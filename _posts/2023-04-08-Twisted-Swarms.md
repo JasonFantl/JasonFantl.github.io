@@ -43,13 +43,13 @@ But let's relate this back to the boids issue that started this all off. Rather 
 ## On a circle
 
 <div class="row align-items-center">
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![line integral](c1.gif){: .center w="200" }
 </div>
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![line integral](c2.gif){: .center w="200" }
 </div>
-<div class="col-md-4">
+<div class="col-md-4" markdown="1">
 ![line integral](c3.gif){: .center w="200" }
 </div>
 </div>
