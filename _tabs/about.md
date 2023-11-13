@@ -11,7 +11,7 @@ img_path: /assets/img/about/
 
 This is my blog where I write about fun ideas, usually with some animations, code, and/or simulations. If you find this interesting, also check out some of my github projects and the academic papers I've contributed to. Below are some of my favorite projects.
 
-{% include link_tree.html %}
+<!-- {% include link_tree.html %} -->
 
 ----------------------
 
