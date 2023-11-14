@@ -1,200 +1,211 @@
 <style>
-.rounded_image {
-width: 200px; /* Set the width and height as per your requirements */
-height: 200px;
-background-size: cover; /* Adjust to your liking, 'cover' will fill the div */
-background-repeat: no-repeat;
-border-radius: 10%; /* Makes the image circular */
-margin: 0 auto; /* Center the image horizontally */
-}
+    .rounded_image {
+        width: 200px;
+        /* Set the width and height as per your requirements */
+        height: 200px;
+        background-size: cover;
+        /* Adjust to your liking, 'cover' will fill the div */
+        background-repeat: no-repeat;
+        border-radius: 10%;
+        /* Makes the image circular */
+        margin: 0 auto;
+        /* Center the image horizontally */
+    }
 
-.grid {
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-padding: 16px; /* Add some padding to the grid */
-}
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 16px;
+        /* Add some padding to the grid */
+    }
 
-.grid-item {
-position: relative;
-margin: 8px;
-overflow: hidden;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for a bevel effect */
-border-radius: 8px; /* Add border-radius for a rounded corner effect */
-}
+    .grid-item {
+        position: relative;
+        margin: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* Add a subtle box shadow for a bevel effect */
+        border-radius: 8px;
+        /* Add border-radius for a rounded corner effect */
+    }
 
-.grid-item iframe,
-.grid-item img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-display: block; /* Remove any default inline spacing */
-border: none; /* Remove borders around the images */
-}
+    .grid-item iframe,
+    .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        /* Remove any default inline spacing */
+        border: none;
+        /* Remove borders around the images */
+    }
 
-.text-overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-text-align: center;
-color: #fff;
-background: rgba(0, 0, 0, 0.3);
-padding: 20px;
-opacity: 1;
-transition: opacity 0.3s ease-in-out;
-z-index: 2;
-line-height: 1.0; /* Adjust the line-height as needed */
-}
+    .text-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 2;
+        line-height: 1.0;
+        text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1);
+    }
 
-.grid-item:hover .text-overlay {
-opacity: 0;
-pointer-events: none; /* Disable pointer events on hover */
-}
+    .grid-item:hover .text-overlay {
+        opacity: 0;
+        pointer-events: none;
+        /* Disable pointer events on hover */
+    }
 
-@media (min-width: 600px) {
-.grid-item {
-flex: 1 0 calc(50% - 16px);
-}
-}
+    @media (min-width: 600px) {
+        .grid-item {
+            flex: 1 0 calc(50% - 16px);
+        }
+    }
 
-@media (min-width: 900px) {
-.grid-item {
-flex: 1 0 calc(33.33% - 16px);
-}
-}
+    @media (min-width: 900px) {
+        .grid-item {
+            flex: 1 0 calc(33.33% - 16px);
+        }
+    }
 </style>
 
 <div class="grid">
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1W6A7YKhjcf-jLc7KB3vF4CmMVKGSL5L1/preview"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A gaming with inlay dice trays, cup holders, maps and stories, and an inlay TV for animated maps.</p>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1W6A7YKhjcf-jLc7KB3vF4CmMVKGSL5L1/preview"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A gaming with inlay dice trays, cup holders, maps and stories, and an inlay TV for animated maps.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1uSDOo_wEHYmwRKtMpqJpPEAfXT7ebTSH/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>In the process of building the game table.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1nC9leuGnBsgV-Qciqyco71vSbJZDZ-iJ/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>One of the stories on the side of the game table.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1ap6JoONk0mUNglDE6BOiO1R4uAu3HQcy/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A modified Dragon Curve fractal, laser engraved onto slates of wood.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1ERqwhmR6UQBDkD7VJpRCxjEjAfhHyfCO/preview" width="300" height="400"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A wood binder with the Fantl crest engraved on the front.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1L5QkZdFuB0iYyLDRHC4EFF-SBUnaAWKc/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A dice tray engraved with runes and flickering lights.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1FSO7I0zr-a8nTsxUD6Lb66V9IyF5LOew/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A fantasy map.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/18TgeQDqtYAqILbJlaWw2nVo8XPTWX5_z/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A copper and stone tree.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/18Gih-k_A4u8AqDfl2XyjXHVR2sxEbo3y/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A wood pipe</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1hugsx6WKY1jeVq-_AnOP1F_vYVvZZxUy/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>The forging of a sword.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/14juKA3FsK-FsKQxOD4KsGr3g_Ln5oHS5/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A cherry blossom made out of stained glass.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1zSHQ-ByA0sNUfTmFPy96qTO_6Ox-Q74I/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>The Philosophers Stone made out of stained glass.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1SqQQEDIDP8q-YTm4ykkCQ1v3VKoCRi9v/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>The Platonic Solids made out of stained glass.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1Ic6HhpMWIl-ij5N01uc85_VI2pUpPS0-/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A wood and epoxy Go board with addressable LEDs underneath.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1I8raCtdKiBPPslEPg0ff6IwitUyON0ny/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>Creating the only physical copies in the world (that I know of) of my favorite web serial.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/13gwj1WSd2Izyv-X9ZCKjTlJFmEOV2DQr/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>A simple quadruped robot spinning around.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1S8MFIfOnIIudwrcK1PfwC7P7Xm4I7d8i/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>3D VR Lenia.</p>
+        </div>
+    </div>
+    <div class="grid-item">
+        <iframe src="https://drive.google.com/file/d/1U6bsXyzd09crn_cr-7l0ocWennAOVXHQ/preview" width="640" height="480"
+            allow="autoplay"></iframe>
+        <div class="text-overlay">
+            <p>Flying a drone simulator with the rotation of my hands.</p>
+        </div>
+    </div>
 </div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1uSDOo_wEHYmwRKtMpqJpPEAfXT7ebTSH/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>In the process of building the game table.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1nC9leuGnBsgV-Qciqyco71vSbJZDZ-iJ/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>One of the stories on the side of the game table.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1ap6JoONk0mUNglDE6BOiO1R4uAu3HQcy/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A modified Dragon Curve fractal, laser engraved onto slates of wood.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1ERqwhmR6UQBDkD7VJpRCxjEjAfhHyfCO/preview" width="300" height="400"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A wood binder with the Fantl crest engraved on the front.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1L5QkZdFuB0iYyLDRHC4EFF-SBUnaAWKc/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A dice tray engraved with runes and flickering lights.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1FSO7I0zr-a8nTsxUD6Lb66V9IyF5LOew/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A fantasy map.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/18TgeQDqtYAqILbJlaWw2nVo8XPTWX5_z/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A copper and stone tree.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/18Gih-k_A4u8AqDfl2XyjXHVR2sxEbo3y/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A wood pipe</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1hugsx6WKY1jeVq-_AnOP1F_vYVvZZxUy/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>The forging of a sword.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/14juKA3FsK-FsKQxOD4KsGr3g_Ln5oHS5/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A cherry blossom made out of stained glass.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1zSHQ-ByA0sNUfTmFPy96qTO_6Ox-Q74I/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>The Philosophers Stone made out of stained glass.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1SqQQEDIDP8q-YTm4ykkCQ1v3VKoCRi9v/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>The Platonic Solids made out of stained glass.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1Ic6HhpMWIl-ij5N01uc85_VI2pUpPS0-/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A wood and epoxy Go board with addressable LEDs underneath.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1I8raCtdKiBPPslEPg0ff6IwitUyON0ny/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>Creating the only physical copies in the world (that I know of) of my favorite web serial.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/13gwj1WSd2Izyv-X9ZCKjTlJFmEOV2DQr/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>A simple quadruped robot spinning around.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1S8MFIfOnIIudwrcK1PfwC7P7Xm4I7d8i/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>3D VR Lenia.</p>
-</div>
-</div>
-<div class="grid-item">
-<iframe src="https://drive.google.com/file/d/1U6bsXyzd09crn_cr-7l0ocWennAOVXHQ/preview" width="640" height="480"
-allow="autoplay"></iframe>
-<div class="text-overlay">
-<p>Flying a drone simulator with the rotation of my hands.</p>
-</div>
-</div>
-</div>    

@@ -19,131 +19,131 @@ Hi, my name is Jason.
 
 This is my blog where I write about fun ideas, usually with some animations, code, and/or simulations. If you find this interesting, also check out some of my github projects and the academic papers I've contributed to. Below are some of my favorite projects.
 
+----------------------
+
+
 <style>
-    .linkx-section {
-        display: flex;
-        justify-content: space-around;
-        gap: 10px;
-        /* Adjust the gap as needed for spacing */
-        margin-bottom: 20px;
-        text-decoration: none;
-    }
-
-    .imagex-link {
-        position: relative;
-        text-decoration: none;
-        color: #333;
-        text-align: center;
-        overflow: visible;
-        padding: 10px;
-        /* Increase padding as needed */
-        margin: 5px;
-        /* Adjust margin if you want more space outside the links */
-        box-sizing: border-box;
-        /* Ensures padding is included in width/height */
-        text-decoration: none;
-    }
-
-    .imagex-link img {
-        max-width: 100%;
-        height: 150px;
-        /* Set a fixed height for all images */
-        /* Set a fixed height for all images */
-        object-fit: cover;
-        /* Ensure images maintain aspect ratio within the fixed height */
-        border-radius: 8px;
-        transition: transform 0.3s ease-in-out;
-        text-decoration: none;
-    }
-
-    .imagex-link:hover img {
-        transform: scale(1.1);
-    }
-
-    .imagex-link {
-        position: relative;
-        text-decoration: none;
-        color: #333;
-        text-align: center;
-        overflow: hidden;
-text-decoration: none;
-    }
-
-    .imagex-text {
-        display: inline;
-        position: absolute;
-        z-index: 1;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: opacity 0.3s ease-in-out;
-        color: #ffffff;
-        /* Text color */
-        font-size: 14px;
-        font-weight: bold;
-        pointer-events: none;
-        line-height: 1.2;
-        text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1);
-
-    }
-
-    .overlayx-link {
-        color: inherit;
-        /* Use the same color as the text */
-        text-decoration: none;
-    }
-
-    .imagex-link:hover .imagex-text {
-        text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
-        /* Adjust shadow size and color on hover */
-
-    }
-
-
-.hidden-text-node {
-    display: none;
+.rounded_image2 {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    border-radius: 10%;
+    margin: 0 auto;
+    transition: transform 0.3s ease-in-out; /* Add transition for smooth effect */
 }
+
+    .grid2 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 16px;
+    }
+
+    .grid-item2 {
+        position: relative;
+        margin: 8px;
+        overflow: hidden;
+        border-radius: 8px;
+        cursor: pointer; /* Added this line */
+    overflow: visible; /* Set overflow to visible */
+
+    }
+
+    .text-overlay2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        opacity: 1;
+        color: white;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 2;
+        line-height: 1.0;
+            font-weight: bold; /* Make the text bold */
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1), 0px 0px 10px rgba(0, 0, 0, 1);
+
+        /* Adjust the line-height as needed */
+    }
+
+.grid-item2:hover .rounded_image2 {
+    transform: scale(1.1); /* Expand image on hover */
+}
+
 
 </style>
 
-----------------------
 
 #### Blog
-<div class="linkx-section" class="hidden_text">
 
-<a href="/posts/Decentralized-Dynamic-Cluster-Identification/" class="imagex-link"><span class="imagex-text">Dynamic Cluster Identification</span> <img src="cluster.png" alt="Dynamic Cluster Identification"></a>
-
-<a href="{% post_url 2023-04-07-Simulated-Economy-(1) %}" class="imagex-link"><span class="imagex-text">Simulating an Economy</span> <img src="economy.png" alt="Simulating an Economy"></a>
-
-<a href="{% post_url 2023-04-09-Non-Euclidian-Renderer %}" class="imagex-link"><span class="imagex-text">Non-Euclidean Renderer</span> <img src="blackhole.gif" alt="Non-Euclidean Renderer"></a>
-
-<a href="{% post_url 2023-04-08-Shaping-Swarms %}" class="imagex-link"><span class="imagex-text">Shaping Swarms in Simulation</span> <img src="swarm.gif" alt="Shaping Swarms in Simulation"></a>
+<div class="grid2">
+    <div class="grid-item2" data-url="{% post_url 2023-08-7-Decentralized-Dynamic-Cluster-Identification %}">
+        <img src="cluster.png" alt="Dynamic Cluster Identification" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Dynamic Cluster Identification</p>
+        </div>
+    </div>
+    <div class="grid-item2" data-url="{% post_url 2023-04-07-Simulated-Economy-(1) %}">
+        <img src="economy.png" alt="Simulating an Economy" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Simulating an Economy</p>
+        </div>
+    </div>
+    <div class="grid-item2" data-url="{% post_url 2023-04-09-Non-Euclidian-Renderer %}">
+        <img src="blackhole.gif" alt="Non-Euclidean Renderer" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Non-Euclidean Renderer</p>
+        </div>
+    </div>
+    <div class="grid-item2" data-url="{% post_url 2023-04-08-Shaping-Swarms %}">
+        <img src="swarm.gif" alt="Shaping Swarms in Simulation" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Shaping Swarms in Simulation</p>
+        </div>
+    </div>
 </div>
 
 ----------------------
 
 #### Github
-
-<div class="linkx-section" class="hidden_text">
-<a href="https://github.com/JasonFantl/Drone-hand-controller" class="imagex-link"><span class="imagex-text">Controlling drones with hand rotation</span> <img src="drone.png" alt="Controlling drones with hand motions"></a>
-
-<a href="https://github.com/JasonFantl/VR-Lenia" class="imagex-link"><span class="imagex-text">Lenia in VR: Continuous 3D cellular automata</span> <img src="lenia.png" alt="Lenia in VR: Continuous 3D cellular automata"></a>
-
-<a href="https://github.com/JasonFantl/Lambda-calculus-interpreter" class="imagex-link"><span class="imagex-text">Lambda Calculus shell interpreter</span> <img src="lambda.jpg" alt="Lambda Calculus shell interpreter"></a>
+<div class="grid2">
+    <div class="grid-item2" data-url="https://github.com/JasonFantl/Drone-hand-controller">
+        <img src="drone.png" alt="Controlling drones with hand motions" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Controlling drones with hand rotation</p>
+        </div>
+    </div>
+    <div class="grid-item2" data-url="https://github.com/JasonFantl/VR-Lenia">
+        <img src="lenia.png" alt="Controlling drones with hand motions" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Lenia in VR: Continuous 3D cellular automata</p>
+        </div>
+    </div>
+    <div class="grid-item2" data-url="https://github.com/JasonFantl/Lambda-calculus-interpreter">
+        <img src="lambda.jpg" alt="Controlling drones with hand motions" class="rounded_image2">
+        <div class="text-overlay2">
+            <p>Lambda Calculus shell interpreter</p>
+        </div>
+    </div>
 </div>
 
 <script>
-  document.querySelectorAll('.hidden_text a').forEach(a => {
-    Array.from(a.childNodes).forEach(node => {
-        if (node.nodeType === 3) { // Node type 3 is a text node
-            const span = document.createElement('span');
-            span.className = 'hidden-text-node';
-            span.textContent = node.textContent;
-            node.parentNode.replaceChild(span, node);
-        }
+    document.querySelectorAll('.grid-item2').forEach(item => {
+        item.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            if(url) {
+                window.location.href = url;
+            }
+        });
     });
-});
 </script>
+
 ----------------------
 
 #### Papers
