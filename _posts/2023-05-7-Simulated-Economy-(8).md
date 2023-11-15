@@ -90,7 +90,7 @@ Although I provide no justification, what if the relationship between foxes, rab
 ![3 populations in chaos](chaotic_population.gif){: .center h="400" }
 
 <div class="row align-items-center">
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 If you plot the path of the point in phase space in three dimensions, you would get the following. Notice how when traveling around the disk that sometimes the Z-axis has a small bump, sometimes a large bump, and sometimes no bump at all. This is exactly what we see when watching the fox population.
 
 This is known as the [Rössler attractor](https://en.wikipedia.org/wiki/R%C3%B6ssler_attractor), and it's far from the strangest shape that we can build.
@@ -103,7 +103,7 @@ This is known as the [Rössler attractor](https://en.wikipedia.org/wiki/R%C3%B6s
 
 ### Chaotic attractors
 <div class="row align-items-center">
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 By introducing this third variable we are thrust into the world of [chaos theory](https://en.wikipedia.org/wiki/Chaos_theory). Here we find beautiful shapes traced out in phase space, lines that never cross or repeat, but wander along a unique shape, an attractor.
 
 Like with our foxes and rabbits, we can trace a point in phase space according to a set of differential equations. Here we see the continuous 3D chaotic Aizawa attractor.
@@ -114,7 +114,7 @@ Like with our foxes and rabbits, we can trace a point in phase space according t
 </div>
 
 <div class="row align-items-center">
-<div class="col-md-6">
+<div class="col-md-6" markdown="1">
 Note that it is necessary to have at least three dimensions for continuous chaotic attractors, but discrete chaotic attractors only need two dimensions. Here we see the [Tinkerbell attractor](https://en.wikipedia.org/wiki/Tinkerbell_map), a discrete 2D chaotic attractor.
 
 Our fox-rabbit-grass simulation is discrete since it's simulated on a computer run by a clock. There's nothing stopping us from using a discrete model for our populations (other then trying to fabric a feasible justification for the equations).
