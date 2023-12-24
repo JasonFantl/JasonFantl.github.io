@@ -4,6 +4,7 @@ categories: [Swarm Intelligence]
 img_path: /assets/img/posts/ShapingSwarms
 math: true
 image: murmuration.gif
+pin: true
 ---
 
 ## Introduction

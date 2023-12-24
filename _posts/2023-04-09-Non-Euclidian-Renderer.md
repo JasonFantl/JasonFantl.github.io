@@ -4,6 +4,7 @@ title: Walking in Non-Euclidean Worlds
 img_path: /assets/img/posts/NonEuclidean
 math: true
 image: blackhole.gif
+pin: true
 ---
 
 What would it look like to walk in a universe where geometry is broken? We will be able to bend space, shrink it, and connect it in strange ways. First, let's discover that non-euclidean universes are already familiar to us, then let us create a way to represent new universes, and finally, let's walk in these strange places.
