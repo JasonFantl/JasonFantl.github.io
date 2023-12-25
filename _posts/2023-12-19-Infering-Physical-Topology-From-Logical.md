@@ -83,20 +83,20 @@ Expanding this out for the two-node one-dimensional case with positions $((x_a, 
 Let's consider the three-node one-dimensional case and visualize the inequalities. There are 8 possible cases (3 edges, each either connected or not), but many of these are equivalent up to node renaming, so we only need to consider four cases (zero, one, two, and three connections). Here are the solution spaces for each case (approximated with boxes, where a box indicates the inequality is satisfied).
 
 <div class="row align-items-center">
-<div class="col-md-3 text-center" markdown="1">
-**No Connections**
+<div class="col-md-3 image-container" markdown="1">
+<div class="text-overlay">No connections</div>
 ![solution space](0-00.gif){: .center w="150" }
 </div>
-<div class="col-md-3 text-center" markdown="1">
-**One connection**
+<div class="col-md-3 image-container" markdown="1">
+<div class="text-overlay">One connection</div>
 ![solution space](1-00.gif){: .center w="150" }
 </div>
-<div class="col-md-3 text-center" markdown="1">
-**Two connections**
+<div class="col-md-3 image-container" markdown="1">
+<div class="text-overlay">Two connections</div>
 ![solution space](1-10.gif){: .center w="150" }
 </div>
-<div class="col-md-3 text-center" markdown="1">
-**Fully connected**
+<div class="col-md-3 image-container" markdown="1">
+<div class="text-overlay">Three connections (fully connected)</div>
 ![solution space](1-11.gif){: .center w="150" }
 </div>
 </div>

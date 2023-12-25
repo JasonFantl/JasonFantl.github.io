@@ -4,6 +4,9 @@ let nodeCount = 10;
 let logicalNodes = [];
 let logicalCenter;
 
+let touchX, touchY;
+let touching = false;
+
 function setup() {
   let canvas = createCanvas(600, 600);
   canvas.parent('p5-canvas-container');
@@ -37,6 +40,34 @@ function setup() {
 
 function draw() {
   background(255);
+
+  // update input position
+  let nowTouching = false;
+  if (touches.length >= 1) {
+    touchX = touches[0].x;
+    touchY = touches[0].y;
+    nowTouching = true;
+  } else if (mouseIsPressed) {
+    touchX = mouseX;
+    touchY = mouseY;
+    nowTouching = true;
+  }
+  if (!nowTouching && touching) { // went from touching to not touching
+    for (let node of nodes) {
+      node.released();
+    }
+    touching = false;
+  } else if (nowTouching && !touching) { // went from not touching to touching
+    for (let node of nodes) {
+      let d = dist(touchX, touchY, node.pos.x, node.pos.y);
+      if (d < node.radius) {
+        node.pressed();
+        break;
+      }
+    }
+  }
+
+  touching = nowTouching;
 
   // Display and update nodes
 
@@ -82,9 +113,3 @@ function draw() {
 
 }
 
-
-function keyPressed() {
-  for (let node of nodes) {
-    node.connectionRange += 5;
-  }
-}

@@ -13,8 +13,8 @@ class PhysicalNode {
 
   update() {
     if (this.dragging) {
-      this.pos.x = mouseX + this.offsetX;
-      this.pos.y = mouseY + this.offsetY;
+      this.pos.x = touchX + this.offsetX;
+      this.pos.y = touchY + this.offsetY;
     }
   }
 
@@ -42,27 +42,11 @@ class PhysicalNode {
 
   pressed() {
     this.dragging = true;
-    this.offsetX = this.pos.x - mouseX;
-    this.offsetY = this.pos.y - mouseY;
+    this.offsetX = this.pos.x - touchX;
+    this.offsetY = this.pos.y - touchY;
   }
 
   released() {
     this.dragging = false;
-  }
-}
-
-function mousePressed() {
-  for (let node of nodes) {
-    let d = dist(mouseX, mouseY, node.pos.x, node.pos.y);
-    if (d < node.radius) {
-      node.pressed();
-      break;
-    }
-  }
-}
-
-function mouseReleased() {
-  for (let node of nodes) {
-    node.released();
   }
 }
