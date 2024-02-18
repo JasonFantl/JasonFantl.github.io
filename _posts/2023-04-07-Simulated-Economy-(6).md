@@ -47,10 +47,14 @@ At iteration 3000 disaster strikes! Riverwood is burned to the ground. And then 
 We see the rise and fall of these cities. From nothing, to specializing in different goods, to an interconnected world economy, and then back to nothing. 
 
 ## Thanks for reading
-There is a lot that could be added: job skills, time delays in traveling, more predictive agents (could this recreate the bullwhip effect in markets?), loans, death+families+inheritance=inter-generational wealth, unique goods (not all chairs are the same), ownership over means of production, governments (taxes, minimum wages, public works, minimum/maximum price setting, etc.), dynamic base values (the more hungry someone is, the more they value food), negative prices for goods (trash), and much more that you ? 
+There is a lot that could be added: job skills, time delays in traveling, more predictive agents (could this recreate the bullwhip effect in markets?), loans, inheritance, unique goods (not all chairs are the same), ownership over means of production, governments (taxes, minimum wages, public works, minimum/maximum price setting, etc.), dynamic base values (the more hungry someone is, the more they value food), negative prices for goods (trash), and much more that you may think up.
 
-If you want to play with any of code at any step along the way, the code for every blog post can be found here. 
+If you want to play with any of code at any step along the way, the code for every blog post can be found [here](https://github.com/JasonFantl/Simulated-Economy-Tutorial/tree/master). 
 
 This is a long way from being playable as any type of game, but hopefully it can act as an inspiration or starting point. The code itself isn't complex, and can be easily recreated in any context as long as you understand the underlying concepts, all of which are shared here in this blog. 
 
 Please share if you create anything similar, I would love to see what people can create! Thanks for reading.
+
+## [Next]({% post_url 2023-04-30-Simulated-Economy-(7) %})
+
+I have some fun additions that aren't core to the ideas demonstrated here, but may be of interest to others. This includes creating networked economies, so economies can reside on many CPUs and computers, where merchants travel over shared memory and the Internet. I also play with connecting the economy to other complex systems by simulating population dynamics, where population counts impact the price of goods in the market (Foxes eat rabbits, the number of rabbits impacts the supply of furs).

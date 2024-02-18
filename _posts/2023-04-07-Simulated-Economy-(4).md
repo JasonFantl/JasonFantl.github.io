@@ -46,5 +46,5 @@ Now let's watch the price of goods change as we give and take money from everyon
 
 We see that introducing more money increases the prices of goods, and similarly decreasing the money supply decreases prices. Unlike the effects we saw from adding or removing goods from the market, inflation causes no rebound or restoring force, it all moves together. When we affected the number of goods in the market, it always returned to same baseline price, but here we don't see that, which is exactly what we would expect to see!
 
-## Next 
+## [Next]({% post_url 2023-04-07-Simulated-Economy-(5) %})
 Our current markets are directly connected to each other, but wouldn't it be interesting if you had geographically separated cities with their own economies? Perhaps one town has an abundance of forest and wood, so wood is cheap there, but over hill and dale is a town with no wood at all. It would be worth a merchants time to simply transport wood from one town to the next, connecting the two economies.

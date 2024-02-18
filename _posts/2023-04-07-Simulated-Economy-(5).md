@@ -93,5 +93,5 @@ And we get exactly what we would expect! When transportation costs from Riverwoo
 
 The full repository can be found [here](https://github.com/JasonFantl/Simulated-Economy-Tutorial/tree/master/5).
 
-## Next 
+## [Next]({% post_url 2023-04-07-Simulated-Economy-(6) %})
 We have a lot of functionality, lets try and have multiple goods interacting and multiple cities. We can play with lots of knobs: the desirability of goods, the cost of materials to build a new good, the transportation cost between cities, and other random events that can do things like destroy or create goods.

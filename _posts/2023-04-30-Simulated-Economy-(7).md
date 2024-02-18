@@ -429,3 +429,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+
+## [Next]({% post_url 2023-05-7-Simulated-Economy-(8) %})
+
+I play with connecting the economy to other complex systems by simulating population dynamics, where population counts impact the price of goods in the market (Foxes eat rabbits, the number of rabbits impacts the supply of furs).

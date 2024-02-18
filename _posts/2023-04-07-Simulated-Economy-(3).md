@@ -80,7 +80,7 @@ Now lets influence the chair market and see how it impacts the wood market. We w
 
 And again we see the coupling of markets. When people stop liking chairs so much, the price of both chairs and wood drops. When people are restricted to a single chair they value both chairs and wood more. When everyone gets lots of chairs we see the same behavior as when everyone got lots of wood, a steep drop in price followed by a slow return to normal prices.
 
-We now have multiple markets which are simply but intimately coupled, where an influence on one market influences the other. The issue of too many goods entering or leaving the market was solved by considering the value of leisure, then having each actor choose only the most valuable action available. Full repository is here.
+We now have multiple markets which are simply but intimately coupled, where an influence on one market influences the other. The issue of too many goods entering or leaving the market was solved by considering the value of leisure, then having each actor choose only the most valuable action available. Full repository is [here](https://github.com/JasonFantl/Simulated-Economy-Tutorial/tree/master/3).
 
-## Next 
+## [Next]({% post_url 2023-04-07-Simulated-Economy-(4) %})
 Currently the unit of value for goods are dollars, but this is unrealistic. If we were to double the amount of money everyone has, the price of goods would increase, but its value would stay the same (then decrease because diminishing utility kicks in when everyone is buying). We want inflation in our markets, and in order to do that we need to separate the concept of value and price.
