@@ -187,6 +187,30 @@ A firefly can get stuck when it has an interval at least twice (really four time
 
 TODO
 
+
+$$
+\begin{align}
+\frac{d\theta_i}{dt} &= w_i + \frac{K}{N} \sum_{j=1}^{N} \sin(\theta_j - \theta_i) \\
+\frac{dw_i}{dt} &= \frac{L}{N} \sum_{j=1}^{N} \sin(\theta_j - \theta_i)
+\end{align}
+$$
+
+They always seem to converge, but thats only empirical simulation. Feel free to try below. I still need to do some sort of dynamic system analysis.
+
+Note that the radius of the clock is no longer linearly proportional to the interval length, it's drawn as `r = 1 / (frequency + 1)`. That means when the radius reaches the edge of the screen, thats due to the frequency being zero, or the interval being infinite.
+
+<div id="p5-canvas-container" style="
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center;     /* Vertical centering */
+"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="/assets/js/posts/Firefly/buttons.js"></script>
+<script src="/assets/js/posts/Firefly/sketch.js"></script>
+<script src="/assets/js/posts/Firefly/firefly.js"></script>
+
+
 ## Local Flashes
 
 TODO
