@@ -1,6 +1,6 @@
 
 var K = 2.0;
-var L = 2.0;
+var L = 1.0;
 
 class Firefly {
     constructor() {
@@ -13,7 +13,7 @@ class Firefly {
 
         // flashing
         this.theta = random(TWO_PI);
-        this.frequency = random(-5.0, 5.0);
+        this.frequency = random(-5.0, 6.0);
 
         // display
         this.flashLength = Math.PI / 8;

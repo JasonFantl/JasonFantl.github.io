@@ -54,7 +54,7 @@ function draw() {
   }
 
   if (isSpeedUpButtonPressed) {
-    for (let i = 0; i < substeps * 20; i++) {
+    for (let i = 0; i < substeps * 10; i++) {
       for (let firefly of fireflies) {
         firefly.update(dt_per_frame / substeps);
       }
