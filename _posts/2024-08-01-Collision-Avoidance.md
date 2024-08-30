@@ -6,15 +6,11 @@ image: cover.png
 math: true
 ---
 
-When you're walking through a large crowd, how do you avoid colliding with everyone else? You arne't communicating with each other, and you aren't being directed by a central director, so how does the large crowd coordinate? Everyone is reacting independently using only their visual senses to estimate the velocity and size of everyone else, using that information to plan out a path to some goal.
+When you're walking through a large crowd, how do you avoid colliding with everyone else? You aren't communicating with each other, and you aren't being directed by a central director, so how does the large crowd coordinate? Everyone is reacting independently using only their visual senses to estimate the velocity and size of everyone else, using that information to plan out a path to some goal.
 
 Let's find an algorithm so we can let robots navigate crowds as well!
 
-Some assumptions we will make to simplify the experiments: 
-* Robots are circles.
-* Robots can read other robots positions, sizes, and velocities.
-* Robots have a max speed.
-* Velocities have some noise (this doesn't necessarily simplify the experiments, but it does remove unstable equilibriums that can occur in simulations).
+This is a toy model and investigation, and as such we make some pretty simplifying assumptions. We assume everyone is a circle and that robots can perfectly sense other robots velocity and size. To make it a bit more interesting we add noise to all velocities (this has the added benefit of removing unstable equilibriums that can occur in simulations like this), and we don't let robots change their velocity instantaneously (more details later).
 
 ## Avoid Nearest Neighbor
 
@@ -57,23 +53,21 @@ That looks pretty good! But we can still do better.
 
 We can calculate the valid velocities that ensure a collision won't occur between any robots, even while they're moving. This is known as a [Velocity Object](https://en.wikipedia.org/wiki/Velocity_obstacle) (VO). VO has been used in maritime calculations since at least 1903 with a neat looking [Battenberg's Course Indicator](https://www.si.edu/object/battenbergs-course-indicator:nmah_1087634) on a [Maneuvering Board](https://cdn.fs.teachablecdn.com/1k2BDPlQ3KyPY9XPPRDZ). Here's how it works.
 
-The most simple case is where we are a point trying to calculate all invalid velocities that would cause a collision with a static circle. That's not too hard, it's just the cone originating at us and envelopes the circle. Clearly if we set our velocity anywhere in the cone, we will collide with the circle.
+The most simple case is where we consider a point and its valid velocities that avoid colliding it with a static circle. That's not too hard, it's just the cone originating at the point and enveloping the circle. Clearly if we set our velocity anywhere in the cone, we will collide with the circle (the red arrow below), and anywhere outside the cone will avoid a collision (green velocity).
 
-[] image of point and cone to circle, with a vector in the circle and one out
+![A point and cone to circle, with a vector in the circle and one out](point_VO.png){: .center w="300" }
 
-If we arne't a point, but a circle instead, we need to add an extra step. Notice for any two circles that are just touching, if we shrink the radius of one and increase the radius of the other in equal parts, the circles will still be touching. This means for the cone calculation we can shrink our robot down to a point as long as we increase the radius of the other robots by the same amount and then we can calculate the cone of invalid velocities exactly as we did in the more basic case (for more general shapes, look into the [Minkowski Sum](https://en.wikipedia.org/wiki/Minkowski_addition)).
+If instead of a point we consider a circle moving, we need to add an extra step. First notice that for any two circles that are just touching, if we shrink the radius of one and increase the radius of the other in equal parts, the circles will still be touching. This means for the sake of the cone calculation we can shrink our robot down to a point as long as we increase the radius of other robots by the same amount, and we reduced the problem to a point and circle (for more general shapes, look into the [Minkowski Sum](https://en.wikipedia.org/wiki/Minkowski_addition)).
 
-[right] image of point and two layers of circles with a cone
+![A circle and cone to circle](circle_VO.png){: .center w="300" }
 
-And finally, what if the other circle is moving at a constant velocity? Notice if we were also traveling at the same velocity, from our new frame of reference it looks as if the other robot is standing still. We can calculate the cone again, but then we need to make sure the final cone is added to that initial velocity we added at the begging of the calculation. 
+And finally, what if the other circle is moving at a constant velocity? Notice if we were also traveling at the same velocity, from our new frame of reference it looks as if the other robot is standing still. We can calculate the cone again, but then we need to shift the frame of reference back, meaning we also shift the collision cone. This shift will be equal to the velocity of the other robot ($v_B$ in the figure below).
 
-[right] image of point and two layers of circles with a cone shifted by the velocity
+![A circle and cone to circle shifted by velocity](moving_VO.png){: .center w="300" }
 
-That is the core of VO and all of its variants. We can now apply VO to all the robots around us and find which velocities are valid.
+That is the core of VO and all of its variants. We can now apply VO to all the robots around us and find which velocities are valid or invalid.
 
-[right] image of circles and all the VO cones
-
-But that still leaves us the decision for which velocity to actually pick. One solution is to pick the velocity closest to the preferred velocity (the one pointing directly at the goal at max speed) that's not restricted by VO. This has the downside that sometimes there are so many robots around us that no velocities are valid. So instead, we will sample many different potential velocities and score each sample velocity based on how well it points at the goal and how well it avoids collisions.  
+But that still leaves us the decision for which velocity to actually pick. One solution is to pick the velocity closest to the preferred velocity (the one pointing directly at the goal at max speed) that's not restricted by any VOs. This has the downside that sometimes there are so many robots around us that no velocities are valid. So instead, we will sample many different potential velocities and score each sample velocity based on how well it points at the goal and how well it avoids collisions.  
 
 ### Sampling Velocities
 
@@ -81,9 +75,23 @@ First we need a way to generate all the sample velocities. We want a sampling of
 
 <div class="row align-items-center">
 <div class="col-md-6" markdown="1">
+```
+for (let radius = 0; radius < 1; radius += 1/10) {
+  for (let angle = 0; angle < 2*PI; angle += 2*PI/100) {
+    point(radius*cos(angle), radius*sin(angle));
+  }
+}
+```
 ![naive sampling](naive_sampling.png){: .center w="200" h="200" }
 </div>
 <div class="col-md-6" markdown="1">
+```
+for (let index = 0; index < 1000; index++) {
+  let radius = sqrt(index / 1000);
+  let angle = index * 2*PI * PHI;
+  point(radius*cos(angle), radius*sin(angle));
+}
+```
 ![golden ratio sampling](golden_sampling.png){: .center w="200" h="200" }
 </div>
 </div>
@@ -119,13 +127,13 @@ And lets go to the crowded circle again! The sampled points will clutter the scr
 
 ![collision avoidance between a circle of robots using VO](50_circle-VO-50_evasion.gif){: .center w="300" }
 
-This looks much nicer then the previous collision avoidance algorithm. There is one modification I haven't mentioned yet that allows VO to work as smoothly as it has. VO has a well-known oscillation issue that arises from two robots constantly flip-flopping their velocities. Here's how it arises: Look to the two robots heading directly towards one-another in the figure below, they must choose a velocity outside of the VO, which means both are no longer pointed at one-another, meaning they can each go back to their preferred velocity, only to repeat the process.
+This looks much nicer then the previous collision avoidance algorithm. But I should now explain the velocity smoothing I mentioned earlier, it plays an important role here. VO has a well-known oscillation issue that arises from two robots constantly flip-flopping their velocities that I tried to avoid with the smoothing. Here's how the issue arises: Look to the two robots heading directly towards one-another in the figure below, they must choose a velocity outside of the VO (the next velocity we label with a prime), which means both are no longer pointed at one-another, meaning they can each go back to their preferred velocity, only to repeat the process.
 
-![oscillation from VO](oscillation_fig.png){: .center w="600" }
+![oscillation from VO](oscillating.png){: .center w="300" }
 
-This figure is from the paper that solved this issue, where a modification of VO was proposed called Reciprocal Velocity Obstacles (RVO), and who's details can be found [here](https://ieeexplore.ieee.org/document/4543489). But we actually take a different approach.
+This figure is inspired from the paper that solved this issue, where a modification of VO was proposed called Reciprocal Velocity Obstacles (RVO), and who's details can be found [here](https://ieeexplore.ieee.org/document/4543489). But we took a different approach (mostly just because I thought it would be fun).
 
-We smooth the robots actual velocity so it can't make discontinuous jumps. The robot has a target velocity and a real velocity, where the real velocity must smoothly follow the target velocity. This means both robots will smoothly come to a stable set of velocities just with VO. 
+We smooth the robots velocity so it can't make discontinuous jumps, which avoids the oscillations if we smooth it over enough frames (the simulation is inherently discrete, so smoothing can only occur across multiple frames). The robot has a target velocity and a real velocity, where the target velocity can make discontinuous jumps, bu the real velocity must smoothly follow the target velocity. This means oscillations can no longer occur since at some point along the way from our current velocity to the target velocity we will hit a stable velocity, and the oscillation disappears.
 
 <details markdown=1><summary markdown="span">
 To see how the smoothing is implemented and some potential alternatives.
@@ -133,23 +141,57 @@ To see how the smoothing is implemented and some potential alternatives.
 
 We can firstly simplify the problem into a one-dimension problem since we can smooth the components of our velocity vector independently.
 
-A common smoothing algorithm for a live data-stream is a Simple Moving Average, which takes the average of the last $k$ data points. This is pretty nice, but it's not as smooth as we might like and requires storing $k$ data points.
+A common smoothing algorithm for a live data-stream is a [Simple Moving Average](https://en.wikipedia.org/wiki/Moving_average#Simple_moving_average), which takes the average of the last $k$ data points. This is pretty nice, but it's not as smooth as we might like and requires storing $k$ data points. Below we see the governing equation, where $x_i$ is the $i$th input signal.
 
-[] gif of SMA with a bar graph in the corner of the weights 
+<div class="row align-items-center">
+<div class="col-md-6 text-center" markdown="1">
+$$ y_t = \frac{1}{k} \sum_{i=0}^{k-1} x_{t-i} $$
+</div>
+<div class="col-md-6 text-center" markdown="1">
+![smoothed signal using a Simple Moving Average](simple_signal.gif){: .center w="400" }
+</div>
+</div>
 
-We could instead take a weighted average of the last $k$ points, where we assign small weights to the most recent and oldest points, and weight most heavily the middle of the $k$ points. This would give us a much smoother signal, and we can even control how quickly it smooths. This is an example of a convolution, which is a very powerful tool capable of much more then just smoothing.
+We could instead take a [Weighted Moving Average](https://en.wikipedia.org/wiki/Moving_average#Weighted_moving_average) of the last $k$ points, where we assign small weights to the most recent and oldest points, and weight most heavily the middle of the $k$ points. This would give us a much smoother signal, and we can even control how quickly it smooths. This is an example of a convolution, which is a very powerful tool capable of much more then just smoothing. Below we sample the weights from a gaussian centered at $k/2$.
 
-[] gif of convolution with a bar graph in the corner of the weights 
+<div class="row align-items-center">
+<div class="col-md-6 text-center" markdown="1">
+$$ y_t = \sum_{i=0}^{k-1} w_i \cdot x_{t-i} $$
+</div>
+<div class="col-md-6 text-center" markdown="1">
+![smoothed signal using a Convolution with a Gaussian](gaussian_signal.gif){: .center w="400" }
+</div>
+</div>
 
-But these methods require storing $k$ points, I want to do it with even fewer.
+But these methods require storing $k$ points, it would be nice to do it with even fewer (just for the sake of elegance).
 
-If we use [Exponential Smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) then we only have to store the previous result. For an $\alpha$ value we can control how quickly it reacts to a change in signal. This has the issue that it isn't very smooth at the discontinuous change.
+If we use [Exponential Smoothing](https://en.wikipedia.org/wiki/Exponential_smoothing) then we only have to store the previous result. For an $\alpha$ value we can control how quickly it reacts to a change in signal. This does have an issue where it isn't very smooth near the discontinuous change in the input signal, but it is one step closer.
 
-[] gif of ES
+<div class="row align-items-center">
+<div class="col-md-6 text-center" markdown="1">
+$$ y_t = \sum_{i=0}^{k-1} w_i \cdot x_{t-i} $$
+</div>
+<div class="col-md-6 text-center" markdown="1">
+![smoothed signal using Exponential Smoothing](exponential_signal.gif){: .center w="400" }
+</div>
+</div>
 
-My favorite implementation is the [critically damped oscillator](https://en.wikipedia.org/wiki/Damping). It requires storing two values, the previous result and its velocity. We imagine the input signal is the source of a spring and our current value is a block attached to the other end of the spring. By dampening the spring we can remove oscillations, and by critically dampening the spring we can reach the target signal as quickly as possible. The spring constant is a parameter we have control over to choose how quickly we react to changes in signal.
+My favorite implementation is the [critically damped oscillator](https://en.wikipedia.org/wiki/Damping). It requires storing two values, the previous result and its velocity. We imagine the input signal is the source of a spring and our current value is a block attached to the other end of the spring. By dampening the spring we can remove oscillations, and by critically dampening the spring we can reach the target signal as quickly as possible. The spring constant is a parameter we have control over to choose how quickly we react to changes in the signal.
 
-[] gif of damped
+<div class="row align-items-center">
+<div class="col-md-6 text-center" markdown="1">
+$$ y_t = y_{t-1} + v_{t-1} \Delta t $$
+
+$$ v_t = v_{t-1} + \left( k (x_t - y_{t-1}) - v_{t-1} 2\sqrt{k} \right) \Delta t $$
+</div>
+<div class="col-md-6 text-center" markdown="1">
+![smoothed signal using a damped spring](spring_signal.gif){: .center w="400" }
+</div>
+</div>
+
+This is in my personal opinion the nicest looking curve for smoothing the velocities, but there really is no best answer here since this a matter of aesthetics.
+
+The code to generate these signals is included at the link at the end.
 
 </details>
 
@@ -189,17 +231,13 @@ And we can compare to the initial algorithm that just avoided the nearest neighb
 
 These experiments did reveal to me that there is no set of parameters that works perfectly well for all simulations. Some of them were smoother if the evasion strength was larger or smaller, or the smoothing of the velocity was too high (collisions occur) or too low (re-introduced oscillations), or the evasion strength was too high (robots were too close to each other and no one could reach their goal) or too low (robots got too close and collided due to the noise added to the velocity).
 
-To see this, why don't we compare the times it takes to complete different sets of simulations with different parameters.
-
-** Under construction
-
-All code for these simulation can be found at ...
+All code for these simulations and figures can be found at [this repo](https://github.com/JasonFantl/CollisionAvoidance) on my Github.
 
 ### Limits
 
 This is a collision avoidance algorithm only for local collisions, it needs to be directed by a higher-order system like a path-finding algorithm to determine what the desired velocity is. VO on its own just points at the goal, which would fail for example in a maze.
 
-VO doesn't handle deadlocks with other robots. You can imagine two robots meeting in a hallway which is too small for either to pass. This is being worked on right now with papers like (Adaptive Optimal Collision Avoidance driven by Opinion)[https://www.semanticscholar.org/reader/b693e30610ed2b4e39a9016b10d05dcdcc09d084] (AVOCADO).
+VO doesn't handle deadlocks with other robots. You can imagine two robots meeting in a hallway which is too small for either to pass. This is being worked on right now with papers like [Adaptive Optimal Collision Avoidance driven by Opinion (AVOCADO)](https://www.semanticscholar.org/reader/b693e30610ed2b4e39a9016b10d05dcdcc09d084).
 
 ## Future Ideas
 
@@ -225,4 +263,4 @@ Avoidance Approach for Unmanned Aerial Vehicles (Fethi Candan, Aykut Beke, Mahdi
 Distributed Multi-agent Navigation Based on Reciprocal Collision
 Avoidance and Locally Confined Multi-agent Path Finding (Stepan Dergachev, Konstantin Yakovlev)
 
-AVOCADO: Adaptive Optimal Collision Avoidance driven by Opinion (Diego Martínez-Baselga, Eduardo Sebastián*, Eduardo Montijano, Luis Riazuelo, Carlos Sagüés, Luis Montano)
+AVOCADO: Adaptive Optimal Collision Avoidance driven by Opinion (Diego Martínez-Baselga, Eduardo Sebastián, Eduardo Montijano, Luis Riazuelo, Carlos Sagüés, Luis Montano)
