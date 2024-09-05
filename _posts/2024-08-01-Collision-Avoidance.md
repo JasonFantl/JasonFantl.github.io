@@ -169,7 +169,7 @@ If we use [Exponential Smoothing](https://en.wikipedia.org/wiki/Exponential_smoo
 
 <div class="row align-items-center">
 <div class="col-md-6 text-center" markdown="1">
-$$ y_t = \sum_{i=0}^{k-1} w_i \cdot x_{t-i} $$
+$$ y_t = (\alpha - 1) y_{t-1} + \alpha x_t $$
 </div>
 <div class="col-md-6 text-center" markdown="1">
 ![smoothed signal using Exponential Smoothing](exponential_signal.gif){: .center w="400" }
@@ -245,9 +245,9 @@ Working more on an adaptive `evasion strength` could allow for robot swarms to c
 
 Similarly, you may want an adaptive `evasion strength` that depends on how long you've been deadlocked for. A small `evasion strength` is less safe, but may be necessary in cases like getting through tight spaces. A good heuristic may be that the longer you are stuck for, the more aggressive you should try to be.
 
-A much more complicated alternative to VO would be to generate a 3D spacetime representation of the available space, and path-find (restricting the path to travel at the robots max speed along the time dimension). This would solve the collisions, high-level path-finding, and deadlocks. Although it may introduce oscillation issues like seen in the original VO.
-
 An interesting problem would be to avoid collisions while also maintaining a cluster of robots. There could be a restraint where a group of robots needs to stay together while avoiding collisions on the way to their destination (like a a family in a crowd).
+
+A much more complicated alternative to VO would be to generate a 3D spacetime representation of the available space, and path-find (restricting the path to travel at the robots max speed along the time dimension). This would solve the collisions, high-level path-finding, and deadlocks. Although it may introduce oscillation issues like seen in the original VO. This idea is [not new](https://arxiv.org/pdf/1210.6855), but generalizing to more environments is still being solved [right now](https://www.researchgate.net/publication/372120963_Robust_MADER_Decentralized_and_Asynchronous_Multiagent_Trajectory_Planner_Robust_to_Communication_Delay).
 
 ## Further Reading
 
@@ -255,7 +255,7 @@ Velocity Obstacle Approaches for Multi-Agent Collision Avoidance (James A. Douth
 
 Reciprocal Velocity Obstacles for Real-Time Multi-Agent Navigation (Jur van den Berg, Ming Lin, Dinesh Manocha)
 
-Reciprocal n-Body Collision Avoidance (Jur van den Berg, Stephen J. Guy, Ming Lin, Dinesh Manocha)
+Reciprocal n-Body Collision Avoidance (Jur van den Berg, Stephen J. Gu1y, Ming Lin, Dinesh Manocha)
 
 A Real-time Fuzzy Interacting Multiple-Model Velocity Obstacle
 Avoidance Approach for Unmanned Aerial Vehicles (Fethi Candan, Aykut Beke, Mahdi Mahfouf, Lyudmila Mihaylova)
@@ -264,3 +264,7 @@ Distributed Multi-agent Navigation Based on Reciprocal Collision
 Avoidance and Locally Confined Multi-agent Path Finding (Stepan Dergachev, Konstantin Yakovlev)
 
 AVOCADO: Adaptive Optimal Collision Avoidance driven by Opinion (Diego Martínez-Baselga, Eduardo Sebastián, Eduardo Montijano, Luis Riazuelo, Carlos Sagüés, Luis Montano)
+
+Asynchronous Decentralized Algorithm for Space-Time Cooperative Pathfinding (Michal Cáp, Peter Novák, Jirí Vokrínek, Michal Pechoucek)
+
+Robust MADER: Decentralized and Asynchronous MultiagentTrajectory Planner Robust to Communication Delay (Kota Kondo, Jesus Tordesillas, Reinaldo Figueroa, Juan Rached, Joseph Merkel, Parker C. Lusk, Jonathan P. How)
