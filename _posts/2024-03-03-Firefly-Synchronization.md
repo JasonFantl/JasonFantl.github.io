@@ -2,6 +2,7 @@
 title: Firefly Synchronization
 categories: []
 img_path: /assets/img/posts/Firefly
+categories: [Swarm Intelligence]
 image: cover.webp
 math: true
 ---

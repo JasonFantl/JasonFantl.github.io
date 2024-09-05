@@ -2,6 +2,7 @@
 title: Collision Avoidance
 categories: []
 img_path: /assets/img/posts/CollisionAvoidance
+categories: [Swarm Intelligence]
 image: cover.png
 math: true
 ---
@@ -57,7 +58,7 @@ The most simple case is where we consider a point and its valid velocities that 
 
 ![A point and cone to circle, with a vector in the circle and one out](point_VO.png){: .center w="300" }
 
-If instead of a point we consider a circle moving, we need to add an extra step. First notice that for any two circles that are just touching, if we shrink the radius of one and increase the radius of the other in equal parts, the circles will still be touching. This means for the sake of the cone calculation we can shrink our robot down to a point as long as we increase the radius of other robots by the same amount, and we reduced the problem to a point and circle (for more general shapes, look into the [Minkowski Sum](https://en.wikipedia.org/wiki/Minkowski_addition)).
+If instead of a point we consider the valid velocities of a circle, we need to add an extra step. First notice that for any two circles that are just touching, if we shrink the radius of one and increase the radius of the other in equal parts, the circles will still be touching. This means for the sake of the cone calculation we can shrink our robot down to a point as long as we increase the radius of other robots by the same amount, and we reduced the problem to a point and circle (for more general shapes, look into the [Minkowski Sum](https://en.wikipedia.org/wiki/Minkowski_addition)).
 
 ![A circle and cone to circle](circle_VO.png){: .center w="300" }
 
@@ -245,7 +246,7 @@ Working more on an adaptive `evasion strength` could allow for robot swarms to c
 
 Similarly, you may want an adaptive `evasion strength` that depends on how long you've been deadlocked for. A small `evasion strength` is less safe, but may be necessary in cases like getting through tight spaces. A good heuristic may be that the longer you are stuck for, the more aggressive you should try to be.
 
-An interesting problem would be to avoid collisions while also maintaining a cluster of robots. There could be a restraint where a group of robots needs to stay together while avoiding collisions on the way to their destination (like a a family in a crowd).
+An interesting problem would be to avoid collisions while also maintaining a cluster of robots. There could be a restraint where a group of robots needs to stay together while avoiding collisions on the way to their destination (like a family in a crowd).
 
 A much more complicated alternative to VO would be to generate a 3D spacetime representation of the available space, and path-find (restricting the path to travel at the robots max speed along the time dimension). This would solve the collisions, high-level path-finding, and deadlocks. Although it may introduce oscillation issues like seen in the original VO. This idea is [not new](https://arxiv.org/pdf/1210.6855), but generalizing to more environments is still being solved [right now](https://www.researchgate.net/publication/372120963_Robust_MADER_Decentralized_and_Asynchronous_Multiagent_Trajectory_Planner_Robust_to_Communication_Delay).
 
