@@ -248,7 +248,7 @@ Similarly, you may want an adaptive `evasion strength` that depends on how long 
 
 An interesting problem would be to avoid collisions while also maintaining a cluster of robots. There could be a restraint where a group of robots needs to stay together while avoiding collisions on the way to their destination (like a family in a crowd).
 
-A much more complicated alternative to VO would be to generate a 3D spacetime representation of the available space, and path-find (restricting the path to travel at the robots max speed along the time dimension). This would solve the collisions, high-level path-finding, and deadlocks. Although it may introduce oscillation issues like seen in the original VO. This idea is [not new](https://arxiv.org/pdf/1210.6855), but generalizing to more environments is still being solved [right now](https://www.researchgate.net/publication/372120963_Robust_MADER_Decentralized_and_Asynchronous_Multiagent_Trajectory_Planner_Robust_to_Communication_Delay).
+A much more complicated alternative to VO would be to generate a 3D spacetime representation of the available space, and path-find (restricting the path to travel at the robots max speed along the time dimension). This would solve the collisions, high-level path-finding, and deadlocks. Although it may introduce oscillation issues like seen in the original VO. This idea is [not new](https://arxiv.org/pdf/1210.6855), but ongoing research is still being done [right now](https://arxiv.org/pdf/2404.15602).
 
 ## Further Reading
 
@@ -268,4 +268,5 @@ AVOCADO: Adaptive Optimal Collision Avoidance driven by Opinion (Diego Martínez
 
 Asynchronous Decentralized Algorithm for Space-Time Cooperative Pathfinding (Michal Cáp, Peter Novák, Jirí Vokrínek, Michal Pechoucek)
 
-Robust MADER: Decentralized and Asynchronous MultiagentTrajectory Planner Robust to Communication Delay (Kota Kondo, Jesus Tordesillas, Reinaldo Figueroa, Juan Rached, Joseph Merkel, Parker C. Lusk, Jonathan P. How)
+Decentralized Multi-Agent Trajectory Planning in Dynamic Environments with Spatiotemporal Occupancy Grid Maps (Siyuan Wu, Gang Chen, Moji Shi, Javier Alonso-Mora)
+
