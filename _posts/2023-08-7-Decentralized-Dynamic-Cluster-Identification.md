@@ -4,7 +4,6 @@ categories: [Swarm Intelligence]
 img_path: /assets/img/posts/ClusterID
 image: cover.png
 math: true
-pin: true
 ---
 
 ## Problem Statement

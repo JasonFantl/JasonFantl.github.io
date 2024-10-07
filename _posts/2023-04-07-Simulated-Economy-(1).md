@@ -4,7 +4,6 @@ categories: [Simulated Economy]
 img_path: /assets/img/posts/SimulatedEconomy/1
 math: true
 image: cover.png
-pin: true
 ---
 
 ## Concept
