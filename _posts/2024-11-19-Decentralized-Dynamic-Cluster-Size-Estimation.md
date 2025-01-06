@@ -8,7 +8,7 @@ math: true
 
 ---
 
-We [previously]({% post_url 2023-08-7-Decentralized-Dynamic-Cluster-Identification %}) designed a cluster ID algorithm to dynamically identify clusters (connected components) of MANETs, but it had some issues. The main issue was that a single node was capable of changing the ID of a large cluster when it joined, but it would be more natural to have the largest cluster win a merge. This means we need a size-estimation algorithm.
+We [previously]({% post_url 2023-08-7-Decentralized-Dynamic-Cluster-Identification %}) designed a cluster ID algorithm to dynamically identify clusters (connected components) of MANETs, but it had some issues. The main issue was that a single node was capable of changing the ID of a large cluster when it joined, while it would be more natural to have the largest cluster win a merge. This means we need a size-estimation algorithm.
 
 ## Recap
 
@@ -61,7 +61,7 @@ If a node keeps track of its neighbors and their hop-counts (which it can do sin
 
 And now every node can pass its value of $1$ to the leader by passing it to a neighbor that's one hop closer to the leader, and keep passing until all the values make their way to the leader. There are a number of ways we could do this.
 
-The easiest way is to have each node pick a single neighbor that's closer to the leader, and pass its value to them. This requires every node to have a unique ID, which is somewhat undesirable. If we wanted to avoid using IDs, we could have each node count how many neighbors it has that are closer to the leader, say $N$ neighbors, and broadcast $\frac{1}{N}$ with the requirement that only people who are closer to the leader can receive the message. This would mean that $N$ nodes would each receive $\frac{1}{N}$, and when all of the values eventually make their way to the leader, they'll still add up to the number of nodes in the swarm. Below we see how over multiple rounds the values make their way to the leader.
+The easiest way is to have each node pick a single neighbor that's closer to the leader, and pass its value to them. This requires every node to have a unique ID, which is somewhat undesirable. If we wanted to avoid using IDs, we could have each node count how many neighbors it has that are closer to the leader, say $N$ neighbors, and broadcast $\frac{1}{N}$ with the requirement that only people who are closer to the leader can receive the message. This would mean that $N$ nodes would each receive $\frac{1}{N}$, and when all of the values eventually make their way to the leader, they'll still add up to the number of nodes in the swarm.
 
 Here's an issue, though: the above routing really does not work well in dynamic swarms. 
 
@@ -71,7 +71,7 @@ When nodes are moving, the neighbors for each node will change every round, caus
 
 ![routing using the first node heard in a communication round](dynamic_routing.gif){: .center w="400" }
 
-Because it's fun to see, let's watch the rooted trees of a very large swarm.
+This will re-build a leader-rooted tree every communication round. Because it's fun to see, let's visualize the rooted trees of a large swarm in a highly dynamic environment.
 
 ![a lot of nodes showing their routing trees](large_routing_tree.gif){: .center w="500" }
 
@@ -81,14 +81,14 @@ First, we look at how the $1$s are passed along the tree. If every node starts w
 
 ![sum over a tree](one_round_sum.gif){: .center w="400" }
 
-But we want to run this counting protocol every round (so it can adapt to changes in swarm size), so we will have each node send $1$ every round. This requires that every node add any incoming values to their current value, and reset the accumulated value to $1$ after each round. That would look like the following, where we also print the final estimated sum at the leader.
+But we want to run this counting protocol every round (so it can adapt to changes in swarm size), so we will have each node send $1$ every round. This requires that every node add any incoming values to their current value, and reset the accumulated value to $1$ after each round. That would look like the following, where we update the estimated sum (printed under the leader) at the end of every round.
 
 ![continuous summing over a tree](many_rounds_sum.gif){: .center w="400" }
 
-> This can easily be used for summing more than just the swarm size, such as summing sensor data (or most generally reducing any commutative semigroup). You could also combine values, such as calculating an average by sending both the node counts and the sensor data, then the leader divides the sum of the sensor data by the sum of the node counts.
+> This can easily be used for summing more than just the swarm size, such as summing sensor data (or most generally reducing any commutative semigroup). You could also send both the node counts and the sensor data st the same time, then divide the sums at the leader to calculate averages.
 {: .prompt-tip }
 
-The reason it takes a few rounds to reach the correct cluster size is that it takes $N$ rounds for a message to reach the leader from $N$ hops away. So the initial estimate is $1$ since the leader hasn't heard from all its closest nodes, and then the estimate is $4$ in the next round since the leader has heard from the three $1$-hop nodes nodes, and so on until all the nodes are participating in the sum.
+The reason it takes a few rounds to reach the correct estimate is that it takes $N$ rounds for a message to reach the leader from $N$ hops away. So the initial estimate is $1$ since the leader hasn't heard from any other nodes. After the first communication round the messages from the three $1$-hop nodes reach the leader and the estimate increases to $4$. After the second communication round the messages from the one $2$-hop node reaches the leader, and now the estimate is correct. Similarly, if the $2$-hop node leaves the swarm, it will take $2$ communication rounds for the estimate at the leader to decreases by $1$.
 
 Let's run this in the dynamic setting, but speed up the rate at which the keep-alive signal is sent, which should compensate for the $N$ hops delay from far-away nodes. We will also plot the estimated swarm size (the thin lines) against the true swarm size (thick lines) to see how accurate this is. And we can use our size estimation in the cluster merges now!
 
@@ -108,9 +108,9 @@ Much better. But why 5 rounds? This gives us a great excuse to track another fea
 
 The radius of a cluster is defined to be the number of hops that the farthest node is from its leader.
 
-Sending this value to the leader is actually much easier than calculating the sum of the swarm. Each node sends their hop-count to the leader, and it can be reduced along the way by always taking the $MAX$. When reducing with $+$ for the size, the total sum across the swarm had to be preserved (which is hard due to duplicated or dropped messages), but with $MAX$, we just need to ensure the largest value makes it to the leader. We can also get rid of ID-based routing and the tree generation since we don't care about duplicated messages, and instead attach a requirement to each broadcast for how low the receivers' hop-count must be. And we don't want to reset each node to $1$ every round like we did for the size; instead, we reset each node to its current hop count (since that is the largest hop count it has seen this round).
+Sending this value to the leader is actually much easier than calculating the sum of the swarm. Each node sends their hop-count to the leader, and it can be reduced along the way by always taking the $MAX$. When reducing with $+$ for the size, the total sum across the swarm had to be preserved (which is hard due to duplicated or dropped messages), but with $MAX$, we just need to ensure the largest value makes it to the leader. We can get rid of ID-based routing and the tree generation since we don't care about duplicated messages, and we can instead attach a requirement to each broadcast for how low the receivers' hop-count must be. And we don't want to reset each node to $1$ every round like we did for the size; instead, we reset each node to its current hop count (since that is the largest hop count it has seen this round).
 
-The following animation is somewhat misleading since, again, these broadcasts are not being addressed to any particular nodes. I have animated it so we see the `max hop count` get sent to the nodes that meet the requirement to have a lower hop-count than the sender, but keep in mind that no ID-based routing was necessary.
+The following animation is somewhat misleading since, again, these broadcasts are not being addressed to any particular nodes. I have animated it so we see the `max seen hop count` get sent to the nodes that meet the requirement to have a lower hop-count than the sender, but keep in mind that no ID-based routing was necessary.
 
 ![radius estimation](radius_estimation.gif){: .center w="400" }
 
@@ -136,7 +136,9 @@ I find it fun that we relied on the original cluster ID algorithm to elect a lea
 <script src="/assets/js/posts/ClusterSize/graphs.js"></script>
 <script src="/assets/js/posts/ClusterSize/sketch.js"></script>
 
-And the pseudocode is below, which maps almost exactly to the code running the animation above. The code for many of the animations can be found [here](https://github.com/JasonFantl/dynamic-MANET-CC-size-estimation/).
+The code for the above animation and some of the other animations can be found [here](https://github.com/JasonFantl/dynamic-MANET-CC-size-estimation/).
+
+And the pseudocode is below, which maps almost exactly to the code running the animation above. This is for the instance where we assume unique node IDs exist, and the tree generation uses the node most recently heard from.
 
 ```go
 onceEveryInterval():
@@ -197,6 +199,10 @@ onReceiveClusterMessage(msg):
         localRadiusAccumulator = distanceToLeader
 ```
 {: .lineno file='Protocol Pseudo Code'}
+
+To modify this code for the non-ID case, you would 
+* Keep track of the number of closer nodes you hear from within a round, then use that number to divide the `sizeContribution` when broadcasting.
+* Check if you have the correct number of hops to receive the `msg.sizeContribution` (identical to the radius estimation) instead of checking that we are the intended recipient.
 
 ## A remaining issue
 
