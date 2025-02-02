@@ -42,8 +42,10 @@ Here are some classic approaches to size estimation in networks:
 * [Push-sum](https://www.cs.cornell.edu/johannes/papers/2003/focs2003-gossip.pdf): A diffusion-based approach that conserves values as they diffuse across the swarm, until you can derive the swarm size based on how diffused the value was. This is not dynamic (at least not for nodes leaving a swarm), and is very slow. It is interesting though, and there are many other diffusion-based protocols that solve different problems.
 * Token-Passing: A counter is passed around that gets incremented for every new node it sees. This is not dynamic and requires knowledge of the entire topology. Or you can use [probabilistic methods](https://repositorium.sdum.uminho.pt/bitstream/1822/37951/1/183.pdf), but these are slow.
 * [Population protocols](https://www.cs.yale.edu/homes/aspnes/papers/minema-survey.pdf): A fascinating class of algorithms that assume the bare minimum of its agents, allowing for highly general algorithms. Population protocols assume random interactions, which is not our environment, but there are still useful [population protocols for size estimation](https://arxiv.org/pdf/2105.05408).
+* Biological: Inspired by fireflies, [this fantastic method](https://ieeexplore.ieee.org/abstract/document/5174691) only relies on the most basic of communication primitives. But it is a bit too slow for our purposes, and we will allow ourselves more complex communication.
+* Tree-based: [This](https://oaktrust.library.tamu.edu/items/611690ef-8b89-4cc9-bcdd-91493183f296) master's thesis is very close to what we will eventually develop, but uses more overhead then is necessary.
 
-But none of these exactly fit our specific environment, so let's develop our own solution! Although, [this](https://oaktrust.library.tamu.edu/items/611690ef-8b89-4cc9-bcdd-91493183f296) master's thesis is very close to what we will eventually develop.
+But none of these exactly fit our specific environment, so let's develop our own solution!
 
 ## Leader as a root
 
@@ -55,7 +57,12 @@ As the keep-alive message travels through the swarm, it can carry an incrementin
 
 ![hop count being updated through the flood fill](hop_count.gif){: .center w="400" }
 
-If a node keeps track of its neighbors and their hop-counts (which it can do since every node will have a broadcast in a flood-fill), then it also will know which nodes to send a message to in order to send information closer to the leader. Below we see arrows indicating who a node can send to in order to send messages closer to the leader, which is derived from a neighbor list it generates every communication round.
+If a node keeps track of its neighbors and their hop-counts (which it can do since every node will have a broadcast in a flood-fill), then it also will know which nodes to send a message to in order to send information closer to the leader. 
+ 
+> This assumes every broadcast is heard by all neighbors of a node, but depending on your [underlying communication model](https://www.researchgate.net/publication/230996891_A_Review_of_Broadcasting_Methods_for_Mobile_Ad_Hoc_Network), this may not be true. For example, if you are broadcasting at the MAC layer, then you may suffer from the [Hidden Node Problem](https://en.wikipedia.org/wiki/Hidden_node_problem). But there are solutions, such as using a [multiple access method](https://en.wikipedia.org/wiki/Channel_access_method) in the MAC layer, such as [Time-division multiple access](https://ieeexplore.ieee.org/document/9410221).
+{: .prompt-warning }
+
+Below we see arrows indicating who a node can send to in order to send messages closer to the leader, which is derived from a neighbor list it generates every communication round.
 
 ![hop count being updated through the flood fill, and arrows showing who to send to](hop_count_gradiant.gif){: .center w="400" }
 
@@ -118,13 +125,13 @@ The following animation is somewhat misleading since, again, these broadcasts ar
 
 By running the size estimation and radius estimation at the same time (they can be combined into a single broadcast), the leader can get a constant stream of size estimations and radii, then use the radius to determine the window size when averaging the sizes. We then use this final size estimate when comparing clusters to determine which one will win a merge.
 
-I find it fun that we relied on the original cluster ID algorithm to elect a leader, which was then used for size estimation, which is now being used to improve the cluster ID algorithm. Let's watch a live simulation, where we should see the smaller clusters are always subsumed by the larger clusters.
+Let's watch a live simulation, where we should see the smaller clusters are always subsumed by the larger clusters.
 
 <div id="p5-canvas-container" style="
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 130%; /* Fill the parent container (blog post) */
+  width: 100%; /* Fill the parent container (blog post) */
   max-width: 100%; /* Ensure no overflow */
 "></div>
 
@@ -203,6 +210,8 @@ onReceiveClusterMessage(msg):
 To modify this code for the non-ID case, you would 
 * Keep track of the number of closer nodes you hear from within a round, then use that number to divide the `sizeContribution` when broadcasting.
 * Check if you have the correct number of hops to receive the `msg.sizeContribution` (identical to the radius estimation) instead of checking that we are the intended recipient.
+
+We should look briefly at the algorithms' space and time complexity. Hypothetically, this algorithm can scale infinitely as long as you cap the size of the averaging window size. The memory is constant other then the rolling window. The time complexity doesn't make as much sense to analyze since this is supposed to run continuously, but we should realize that information still takes $N$ communication rounds to reach the leader from $N$ hops away, so the estimations get increasingly out-of-date with reality as we scale up.
 
 ## A remaining issue
 
