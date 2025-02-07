@@ -20,7 +20,7 @@ Let's start with the naive implementation and see where it takes us.
 
 ## Random assignment
 
-If a leader node flood-fills the network with a message containing each group and its location, then each node can just randomly pick one and move there.
+If a leader node flood-fills the network with a message containing groups and their positions, then each node can just randomly pick a group and move to its position (the colored circle).
 
 ![ random group assignment ](random.gif){: .center w="600" }
 

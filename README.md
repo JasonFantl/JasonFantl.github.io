@@ -2,7 +2,7 @@
 
 optimize all gifs in a directory with
 ```
-for f in *.gif; do gifsicle -O3 --lossy=80 --colors 256 "$f" -o "$f"; done
+for f in *.gif; do gifsicle -O3 --colors 256 "$f" -o "$f"; done
 ```
 
 
