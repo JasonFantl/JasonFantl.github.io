@@ -126,13 +126,31 @@ I should mention that there are [other representations of 3D rotations](https://
 
 All the code used to generate the animations can be found [here](https://github.com/JasonFantl/Blog-Post-Rediscovering-Quaternions).
 
-<!-- 
-TODO
+
 ## Fixing the gimbal
 
-Recall that astronaut Mike Collins asked for a fourth gimbal in order to avoid gimbal lock and discontinuities, how does a fourth gimbal fix the issue? If we can use the extra ring to keep the other 3 rings from becoming parallel, then we shouldn't ever enter gimbal lock. So now that we've rediscovered quaternions to safely represent 3D rotations, how would we map a quaternion to the angles of a 4-ring gimbal? This would allow us to fix the issue on Apollo 11.
+Recall that astronaut Mike Collins asked for a fourth gimbal in order to avoid gimbal lock and discontinuities, how does a fourth gimbal fix the issue?
 
-I have to say, it was surprisingly difficult to find equations to map quaternions to a 4-ring gimbal system. Many academic papers focus on heuristics or live feed-back mechanisms, or on other control systems similar to gimbals.
+For three gimbals we had a unique set of angles that represented a rotation, so by adding a fourth gimbal we enable a rotation to be represented by many different possible sets of angles. Below we see how the airplane is staying still while the gimbals can move (not at any angle, they still need to produce the desired rotation, but we still see how there is more then one way to represent a rotation with four gimbals).
 
--->
+![ 4-DOF gimbal ](steady_4_gimbals.gif){: w="500" }
+
+With this additional degree fo freedom, we can now steer around singularities. Imagine we get too close to a singularity, then we just pause the object rotating and move the gimbals around until we're farther from the singularity, then continue the rotation. But ideally, we don't have to pause the rotation. There must be a way to map quaternions to 4-DOF gimbals that eliminates the singularities altogether. So, what does such a mapping look like?
+
+It turns out, no such mapping exist, not even if we add more redundant gimbals. You can dive into the details if you like (theorem 1.3 in [these notes](https://web.stanford.edu/~bvchurch/assets/files/talks/Quaternions.pdf)), but essentially it is because it's not possible to map a set of angles (represented by the space $T^4$) to the space of rotations ($\mathbb{RP}^{3}$) without introducing singularities.
+
+But not all is lost. We can construct a function that maps the desired rotation _and_ the current gimbal angles into the next gimbal angles. Essentially, this is a function that depends on where the gimbal currently is in order to determine where it should be next. This has the funny implication that we can rotate an object around and return it to its original orientation, but the gimbals may not be in the same orientation.
+
+Below we see the airplane moving randomly as we adjust the gimbals to avoid singularities. Every frame we calculate the set of angles that maximizes the distance to a singularity (the determinant of the Jacobian matrix) while always satisfying our desired rotation.
+
+![ 4-DOF gimbal ](4_euler_angles.gif){: w="500" }
+
+Long ago NASA had [theoretical results](https://ntrs.nasa.gov/api/citations/19860015697/downloads/19860015697.pdf) on 4-DOF gimbals (also called 4-axis gimbals), and since then there has been an [abundance of results](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C22&q=singularity-free+gimbal&btnG=) on singularity avoidance in gimbal systems of all kinds.
+
+If you want to explore more on the movement of robots, I found [this textbook](https://www.cse.lehigh.edu/~trink/Courses/RoboticsII/reading/murray-li-sastry-94-complete.pdf) very well-written and useful.
+
+<!-- https://cdn.thomasnet.com/ccp/00700114/45947.pdf
+https://ieeexplore.ieee.org/abstract/document/7261040 -->
+
+
 
