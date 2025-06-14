@@ -1,7 +1,7 @@
 ---
 title: Walking in Non-Euclidean Worlds
 # categories: [Swarm Intelligence]
-img_path: https://684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/NonEuclidean
+img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/NonEuclidean
 math: true
 image: blackhole.gif
 ---
