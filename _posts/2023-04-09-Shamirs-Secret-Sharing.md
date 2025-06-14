@@ -1,7 +1,7 @@
 ---
 title: Shamir's Secret Sharing in Go
 # categories: [Swarm Intelligence]
-img_path: /assets/img/posts/SecretSharing
+img_path: https://684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/SecretSharing
 math: true
 image: poly.png
 ---
