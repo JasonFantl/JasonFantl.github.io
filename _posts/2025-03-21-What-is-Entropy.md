@@ -1,7 +1,7 @@
 ---
 title: What is Entropy?
 categories: []
-img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/Entropy
+img_path: https:///bloag-assets.netlify.app/gifs/Entropy
 image: cover.png
 math: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: Dynamic Decentralized Cluster Identification
 categories: [Swarm Intelligence]
-img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/ClusterID
+img_path: https:///bloag-assets.netlify.app/gifs/ClusterID
 image: cover.png
 math: true
 ---

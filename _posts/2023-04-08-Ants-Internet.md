@@ -1,7 +1,7 @@
 ---
 title: A Control Principle Used by Ants and the Internet
 categories: [Swarm Intelligence]
-img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/AntsInternet
+img_path: https:///bloag-assets.netlify.app/gifs/AntsInternet
 math: true
 image: cover.png
 ---

@@ -1,7 +1,7 @@
 ---
 title: Thinking About Color Perception
 categories: []
-img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/Color
+img_path: https:///bloag-assets.netlify.app/gifs/Color
 image: cover.png
 math: true
 ---

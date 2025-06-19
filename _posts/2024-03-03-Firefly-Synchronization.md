@@ -1,7 +1,7 @@
 ---
 title: Firefly Synchronization
 categories: []
-img_path: https:///684cd055bb4956d0e4cc98c5--bloag-assets.netlify.app/gifs/Firefly
+img_path: https:///bloag-assets.netlify.app/gifs/Firefly
 categories: [Swarm Intelligence]
 image: cover.webp
 math: true
