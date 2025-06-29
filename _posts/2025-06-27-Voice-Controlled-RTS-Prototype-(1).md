@@ -6,14 +6,31 @@ image: cover.webp
 math: true
 ---
 
-> This blog post is different from my previous ones. Here, we're mostly writing code and exploring a recent technology, rather than just learning about an interesting idea.
-{: .prompt-tip }
+<style>
+  .fluid-video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    padding-bottom: 10px;
+  }
+</style>
+
+<!-- > This blog post is different from my previous ones. Here, we're mostly writing code and exploring a recent technology, rather than just learning about an interesting idea.
+{: .prompt-tip } -->
 
 The goal is to create a prototype real-time strategy game inspired by Command School from _Ender's Game_, where two players act as fleet commanders. Each player directs fleets of assets in battle by speaking in real time to subcommanders, implemented as LLMs, who coordinate sub-fleets.
 
 We’ll build this in many steps, with this first post focusing on the voice-to-game interaction. We'll start with hello-world examples for each individual component of the architecture, combine those components, and then increase the complexity to try and match the final prototype. The glue connecting these components will be the [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP), a recent development in the world of agentic LLMs.
 
-The initial overall architecture for users interacting with the game will be as follows: the player holds down a button to speak a command, which gets transcribed using a voice-to-text model. The transcription is sent to an LLM agent connected to an MCP server. That server controls the simulation, meaning the agent can directly interact with the simulation using any available tools implemented on the server.
+Here is what we will have by the end of this post.
+
+<video class="fluid-video" controls playsinline>
+  <source src="https:///bloag-assets.netlify.app/gifs/voicertsproto/1/canvas-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+The overall architecture for how users interact with the game will be as follows: the player holds down a button to speak a command, which gets transcribed using a voice-to-text model. The transcription is sent to an LLM agent connected to an MCP server. That server controls the simulation, meaning the agent can directly interact with the simulation using any available tools implemented on the server.
 
 ![interaction architecture](architecture.svg){: .center w="500" }
 
@@ -134,15 +151,6 @@ Next, we test whether the MCP server works. The MCP CLI provides a development t
 ```
 mcp dev counter-mcp-server.py
 ```
-
-<style>
-  .fluid-video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: auto;
-  }
-</style>
 
 <video class="fluid-video" controls playsinline>
   <source src="https:///bloag-assets.netlify.app/gifs/voicertsproto/1/mcp-inspector.mp4" type="video/mp4">
