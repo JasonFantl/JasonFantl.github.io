@@ -1,12 +1,10 @@
 ---
-title: Prototyping a Voice-Controlled RTS Game with LLM Agents (2)
+title: Voice Controlled Swarms
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/voicertsproto/2
+img_path: https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms
 image: cover.webp
 math: true
 ---
-
-<!-- img_path: https:///bloag-assets.netlify.app/gifs/voicertsproto/2 -->
 
 <style>
   .fluid-video {
@@ -18,12 +16,58 @@ math: true
   }
 </style>
 
+Inspired by Command School from Enders Game, let's make swarms that we can control with our voice! We will do this by having a voice-to-text program feed our voice commands into an LLM, and then that LLM can run a bunch of commands to control the swarm.  
 
-Let's make the Command School game!
+Below is the final result.
 
-This is a prototype, so we're going to implement the first ideas that come to mind, and maybe fix it later.
+<video class="fluid-video" controls playsinline>
+  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
-## Swarm Control
+
+And we will make this in two parts:
+
+1. First we will create a general voice-controller that can plug into any application that supports the [Model Context Protocol](https://modelcontextprotocol.io/introduction) (MCP). As an example, we will make a canvas application where the LLM can draw shapes on a canvas and move the shapes around, allowing us to "draw" with our voice.
+2. Then we will make a swarm simulation with a large set of commands which allow the LLM to direct the swarms according to our commands.
+
+
+# Voice-Controller
+
+The overall architecture for how users interact with the simulation will be as follows: the player holds down a button to speak a command, which gets transcribed using a voice-to-text model. The transcription is sent to an LLM agent connected to an MCP server. That server controls the simulation, meaning the agent can directly interact with the simulation using any available tools implemented on the server.
+
+![interaction architecture](architecture.svg){: .center w="500" }
+
+One neat aspect of this architecture is that the voice-controlled agent is independent of the application running on the MCP server. This means we can reuse the voice-controlled agent for any MCP-compatible application. In fact, we’ll develop the voice-controlled agent only once and then use it to interact with multiple MCP servers.
+
+As an example, we create a fairly simple MCP server below. 
+
+## Canvas MCP Server
+
+We create a canvas that can show squares and circles. We create a few simple functions on the canvas that the LLM can call, then the LLM will be able to turn the voice commands we say into actual function calls on the canvas.
+
+Here are the commands we provide, which in the language of LLM agents are called the 'tools'.
+
+* `create_circle`
+* `create_square`
+* `move_shapes`
+* `remove_shapes`
+* `get_canvas`
+
+It’s essential to write good documentation for each tool, as this is what the LLM will read when choosing what actions to take. I found that including example inputs, expected ranges, and typical values can help to improve its performance. All the code for this project can be found on [GitHub](https://github.com/JasonFantl/LLMSwarmControl/tree/master/).
+
+And once we have the server running and a voice-controller connected to it, we get the below.
+
+<video class="fluid-video" controls playsinline>
+  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/canvas-demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+The agent can make dumb mistakes, but it can also sometimes be surprisingly clever. One funny interaction I had: Everything seemed to be working correctly, but then I noticed I had forgotten to implement the `remove_shapes` function. This was weird since the agent seemed to be removing shapes when I asked. It turns out that when the agent couldn't find a tool to remove the shapes, it would decide to move the shapes off the side of the screen so I couldn't see them anymore, which made it look like the non-existent `remove_shapes` function was working just fine.
+
+And now that we can see how we can control a canvas with our voice, we can do the same with a swarm simulation. But that requires writing a sufficiently capable swarm simulation, as well as the tools to allow the LLM to convert our commands into actual actions.
+
+# Swarm Simulation
 
 The individual agents of a swarm (or fleet, we will use the terms interchangeably) will be controlled using a modified version of the [boids algorithm](https://en.wikipedia.org/wiki/Boids) along with a seeking rule that points each boid toward its target. We only use the separation rule and alignment rule from the boids algorithm, but modified as below.
 
@@ -122,10 +166,8 @@ So the tools that the agent will have access to are:
 And now we can try to control the swarms with our voice.
 
 <video class="fluid-video" controls playsinline>
-  <source src="https:///bloag-assets.netlify.app/gifs/voicertsproto/2/speaking_demo.mp4" type="video/mp4">
+  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
 And the code for everything here can be found at my [GitHub](https://github.com/JasonFantl/LLMSwarmControl/tree/master/2/swarm-simulation).
-
-Next we will focus on team interaction, such as drones on one team being capable of destroying drones from the opposing team.
