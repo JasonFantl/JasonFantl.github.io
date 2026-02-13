@@ -8,7 +8,9 @@ math: true
 
 We are an exploratory species, just past the solar system now, but perhaps one day we will look back and call our galaxy merely the first. There are many problems to solve along the way, and today we will look at one very small one. How do we assign IDs to devices (or any object) so the IDs are guaranteed to always be unique?
 
-Being able to identify objects is important for communications, logistics, trade, and manufacturing, and is in general a fundamental tool for other protocols. The point of an ID is to differentiate one object from another, so we need to make sure we don't assign the same ID twice. Unique ID assignment becomes a more challenging problem when we try to solve it at the scale of the whole universe.
+Being able to identify objects is a fundamental tool for building other protocols, and it also underpins manufacturing, logistics, communications, and security. Every ship and satellite needs an ID for traffic control and maintenance history. Every radio, router, and sensor needs an ID so packets have a source and destination. Every manufactured component needs an ID for traceability. And at scale, the count explodes: swarms of robots, trillions of parts, and oceans of cargo containers moving through a civilization’s supply chain. 
+
+One of the key functions of an ID is to differentiate objects from one another, so we need to make sure we don't assign the same ID twice. Unique ID assignment becomes a more challenging problem when we try to solve it at the scale of the universe.
 
 But we can try.
 
@@ -275,7 +277,11 @@ That's some pretty clean results! We see a roughly straight line for most plots 
 
 And we still see the linear trends on the exponential plot, which indicates that Dewey and Token schemes still grow logarithmically.
 
-Here is my best explanation for why the plots are logarithmic. In the Random growth model, each node is statistically indistinguishable from the others, so we should expect every node to see the same *average* subtree over time. In distribution, the subtree under the root should look similar to the subtree under the millionth node, just at a smaller scale. This suggests that we can use a recursive relation between these subtrees to infer the overall scaling law.
+<details markdown=1><summary markdown="span">
+Here is my best explanation for why the plots are logarithmic.
+</summary>
+
+In the Random growth model, each node is statistically indistinguishable from the others, so we should expect every node to see the same *average* subtree over time. In distribution, the subtree under the root should look similar to the subtree under the millionth node, just at a smaller scale. This suggests that we can use a recursive relation between these subtrees to infer the overall scaling law.
 
 Suppose we simulate the growth of a 1,000-node tree and observe that the maximum ID length has increased by about 34 bits (which is what we saw for Dewey). We then take the node with the longest ID among those 1,000 nodes and conceptually re-run a 1,000-node simulation with this node acting as the root. Because the Random model treats all nodes symmetrically, we expect this node’s subtree to grow in a statistically similar way to the original root’s subtree. Since all of our ID assignment schemes have additive ID lengths along ancestry, growing this subtree to 1,000 nodes should increase the maximum ID length by roughly another 34 bits.
 
@@ -287,33 +293,37 @@ This analysis is harder to apply to the Fitness and Preferential model, as nodes
 
 Future simulations might also consider that devices have lifetimes (nodes disappear after some time), which can dramatically alter the analysis. Initial tests with a constant lifetime (relative to how many nodes have been added) showed linear growth of IDs over time. This makes sense since it essentially forces a wide chain, which we know grows linearly for all our ID assignment schemes. Is this a reasonable assumption? What if devices live longer if they are more popular, how might that change the outcome?
 
+</details>
+
 For now we will use the above simulations as the first rung on our [ladder](https://en.wikipedia.org/wiki/Cosmic_distance_ladder) of simulations, using those results to plug into larger models which then are plugged into even larger models.
 
 ### Large-scale
 
-In order to determine how many bits these schemes might take for a universe-wide humanity, we need to evaluate models of how our IDs will grow between worlds.
+In order to determine how many bits these schemes might require for a universe-wide humanity, we need to evaluate models of how our IDs will grow between worlds.
 
-We will use the million-node simulation of the Fitness growth model to model the assignment of IDs on the surface of a planet for its first few years. To scale up to a full planet over hundreds of years, we can fit a logarithmic curve to our Fitness model and extrapolate, or we can run the simulation multiple times in the process described above.
+We will use the million-node simulation of the Fitness growth model to model the assignment of IDs on the surface of a planet for its first few years. To scale up to a full planet over hundreds of years, we can fit a logarithmic curve to our Fitness model and extrapolate.
 
 For this analysis we will select the Dewey ID assignment scheme since it seems to perform well across all growth models.
 
-If we fit a logarithmic curve to the max ID length of Dewey ID assignment in the Fitness growth model, it fits the curve $(6.5534 ± 0.2856) \ln(n)$ (where $0.2856$ is the standard deviation). This allows us to closely approximate the max ID length after an arbitrary number of devices.
+![](log.png){: .right w="100" }
 
-We have our model for expansion on a planet, now we need a model for how humanity spreads from one planet to the next. We can't really know what it will look like when/if we expand into the universe, but people have definitely tried. Below are some papers modeling how humans will expand into the universe: 
+When we fit a logarithmic curve to the max ID length of Dewey ID assignment in the Fitness growth model, it fits the curve $(6.5534 ± 0.2856) \ln(n)$ (where $0.2856$ is the standard deviation). This equation now allows us to closely approximate the max ID length after an arbitrary number of devices.
+
+We have our model for expansion on a planet, now we need a model for how humanity spreads from one planet to the next. We can't really know what it will look like when/if we expand into the universe, but people have definitely tried. Below are some papers modeling how humans will expand into the universe, from which we can try to create our own best-guess model more relevant to our analysis. 
 
 * [Galactic Civilizations: Population Dynamics and Interstellar Diffusion](https://ntrs.nasa.gov/api/citations/19790011801/downloads/19790011801.pdf), by Newman and Sagan. Essentially, expansion through the galaxy is slow because only newly settled planets contribute to further spread, and each must undergo local population growth before exporting colonists, producing a slow and constant traveling wavefront of expansion across the galaxy.
 * [The Fermi Paradox: An Approach Based on Percolation Theory](https://ntrs.nasa.gov/api/citations/19940022867/downloads/19940022867.pdf), by Geoffrey A. Landis. Essentially, using Percolation Theory with some "reasonable" values for the rate of spreading to new planets and rates of survival, this paper finds that some wavefronts will die out while others survive, meaning we will slowly spread through the galaxy in branches.
 * [The Fermi Paradox and the Aurora Effect: Exo-civilization Settlement, Expansion and Steady States](https://arxiv.org/pdf/1902.04450v2). Essentially, modeling solar systems as a gas and settlement as a process that depends on the distance between planets, planets living conditions, and civilization lifetimes, they find that distant clusters of the universe will fall into a steady state of being settled. 
 
-From these results we can try to make a best-guess model for expansion to new planets.
-
 We will model the expansion between planets in a galaxy by using a constant-speed expanding wavefront that settles any habitable planet, where that new planet is seeded with a random ID from the closest settled planet. We will use the same model for the expansion between galaxies. 
 
-This will produce linear growth of ID-length as the wavefront moves outward. As each planet restarts the ID assignment process it will cause the ID length to grow larger according to the same curve as we extracted for the first planet.
+This will produce linear growth of ID-length as the wavefront moves outward. As each planet restarts the ID assignment process, it will cause the ID length to grow larger according to the same curve we saw for the first planet.
 
 We have a rough estimate that there might be around [40 billion habitable planets in our Milky Way galaxy](https://www.latimes.com/science/la-sci-earth-like-planets-20131105-story.html), and the latest estimates hold there are around [2 trillion galaxies in the observable universe](https://science.nasa.gov/missions/hubble/hubble-reveals-observable-universe-contains-10-times-more-galaxies-than-previously-thought/).
 
-If we assume that planets are close to uniformly positioned in a galaxy and the galaxy is roughly spherical (seems a little more justified than doing it to a cow, but the bigger criticism is that many galaxies are disks, but it won't change the final conclusion and spheres are easy), then we can expect the radius of the galaxy in terms of planet-hops can be solved for using the equation of the volume of a sphere. The radius in terms of planet-hops can be approximated by $\sqrt[3]{\frac{3V}{4 \pi}} = \sqrt[3]{\frac{3 \cdot 40 \cdot 10^{9}}{4 \pi}} \approx 2121$. 
+If we assume that planets are close to uniformly positioned in a galaxy and the galaxy is roughly spherical (many galaxies are actually disks, but it won't change the final conclusion), then we can expect the radius of the galaxy in terms of planet-hops can be solved for using the equation of the volume of a sphere. The radius in terms of planet-hops can be approximated by $\sqrt[3]{\frac{3V}{4 \pi}} = \sqrt[3]{\frac{3 \cdot 40 \cdot 10^{9}}{4 \pi}} \approx 2121$. 
+
+![](solar-systems.png){: .center w="400" }
 
 If we assume each planet produces around 1 billion IDs before settling the next nearest planet, then we can calculate the ID length by the time it reaches the edge of the galaxy. This will be the amount by which the longest ID increases per planet (we are assuming 1 billion assignments) multiplied by the number of times this happens, which is the number of planets we hop to reach the edge of the galaxy. This doesn't sound good.
 
@@ -321,7 +331,11 @@ $$
 6.5534 \cdot \ln(10^9) \cdot 2121 \approx 288048
 $$
 
-That is a lot of bits. And it will only get worse. Using the same approximation as above, we get the number of hops between galaxies to be $\sqrt[3]{\frac{3 \cdot 2 \cdot 10^{12}}{4 \pi}} \approx 7816$. And using the $288048$ from above as the length the ID increases every galaxy, we get
+That is a lot of bits. And it will only get worse. We will use the same approximation for galaxies as we did for planets.
+
+![](universe.png){: .center w="400" }
+
+Again assuming galaxies fill space uniformly, and as a sphere, we get the number of hops between galaxies to be $\sqrt[3]{\frac{3 \cdot 2 \cdot 10^{12}}{4 \pi}} \approx 7816$. And using the $288048$ from above as the length the ID increases every galaxy, we get
 
 $$
 288048 \cdot 7816 = 2251383168
