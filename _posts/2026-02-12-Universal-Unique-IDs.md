@@ -1,7 +1,7 @@
 ---
 title: Cosmologically Unique IDs
 categories: []
-img_path: https://jason-fantl-blog.b-cdn.net/
+img_path: https:///jason-fantl-blog.b-cdn.net/
 image: cover.png
 math: true
 ---
