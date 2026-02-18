@@ -1,10 +1,12 @@
 ---
 title: Cosmologically Unique IDs
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/CUIDs
+img_path: https://jason-fantl-blog.b-cdn.net/
 image: cover.png
 math: true
 ---
+
+<!-- original img_path: https:///bloag-assets.netlify.app/gifs/CUIDs -->
 
 We are an exploratory species, just past the solar system now, but perhaps one day we will look back and call our galaxy merely the first. There are many problems to solve along the way, and today we will look at one very small one. How do we assign IDs to devices (or any object) so the IDs are guaranteed to always be unique?
 
