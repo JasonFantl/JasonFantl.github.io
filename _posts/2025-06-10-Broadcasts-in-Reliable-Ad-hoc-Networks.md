@@ -1,7 +1,7 @@
 ---
 title: Broadcasts in Reliable Ad-hoc Networks
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/broadcasts
+img_path: https:///blog-assets.jasonemerald.workers.dev/Broadcasts
 image: cover.png
 math: true
 ---

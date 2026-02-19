@@ -1,7 +1,7 @@
 ---
 title: Molecule-Inspired Simulations
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/Molecules
+img_path: https:///blog-assets.jasonemerald.workers.dev/Molecules
 math: true
 ---
 

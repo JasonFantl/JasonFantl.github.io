@@ -1,7 +1,7 @@
 ---
 title: Collision Avoidance
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/CollisionAvoidance
+img_path: https:///blog-assets.jasonemerald.workers.dev/CollisionAvoidance
 categories: [Swarm Intelligence]
 image: cover.png
 math: true

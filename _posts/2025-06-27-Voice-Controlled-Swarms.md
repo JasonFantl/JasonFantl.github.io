@@ -1,7 +1,7 @@
 ---
 title: Voice Controlled Swarms
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms
+img_path: https:///blog-assets.jasonemerald.workers.dev/voicecontrolledswarms
 image: cover.webp
 math: true
 ---
@@ -21,7 +21,7 @@ Inspired by Command School from Enders Game, let's make swarms that we can contr
 Below is the final result.
 
 <video class="fluid-video" controls playsinline>
-  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
+  <source src="https:///blog-assets.jasonemerald.workers.dev/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -59,7 +59,7 @@ It’s essential to write good documentation for each tool, as this is what the 
 And once we have the server running and a voice-controller connected to it, we get the below.
 
 <video class="fluid-video" controls playsinline>
-  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/canvas-demo.mp4" type="video/mp4">
+  <source src="https:///blog-assets.jasonemerald.workers.dev/voicecontrolledswarms/canvas-demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -166,7 +166,7 @@ So the tools that the agent will have access to are:
 And now we can try to control the swarms with our voice.
 
 <video class="fluid-video" controls playsinline>
-  <source src="https:///bloag-assets.netlify.app/gifs/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
+  <source src="https:///blog-assets.jasonemerald.workers.dev/voicecontrolledswarms/speaking_demo.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

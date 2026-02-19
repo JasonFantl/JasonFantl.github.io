@@ -1,7 +1,7 @@
 ---
 title: Universal Codes for Variable-length Encoding
 categories: []  
-img_path: https:///bloag-assets.netlify.app/gifs/UniversalCodes
+img_path: https:///blog-assets.jasonemerald.workers.dev/UniversalCodes
 image: cover.png  
 math: true  
 ---

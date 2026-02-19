@@ -1,7 +1,7 @@
 ---
 title: Simulated Economy (5)
 categories: [Simulated Economy]
-img_path: https:///bloag-assets.netlify.app/gifs/SimulatedEconomy/5
+img_path: https:///blog-assets.jasonemerald.workers.dev/SimulatedEconomy/5
 math: true
 image: cover.png
 ---

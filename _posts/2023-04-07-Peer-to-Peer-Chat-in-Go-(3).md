@@ -1,7 +1,7 @@
 ---
 title: Peer to Peer Chat Network in Go (3)
 categories: [Peer To Peer Chat Application]
-img_path: https:///bloag-assets.netlify.app/gifs/PeerToPeer/3
+img_path: https:///blog-assets.jasonemerald.workers.dev/PeerToPeer/3
 math: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Distributed Swarm Group Assignment
 categories: [Swarm Intelligence]  
-img_path: https:///bloag-assets.netlify.app/gifs/SwarmPartitioning
+img_path: https:///blog-assets.jasonemerald.workers.dev/SwarmPartitioning
 image: cover.png  
 math: true  
 ---

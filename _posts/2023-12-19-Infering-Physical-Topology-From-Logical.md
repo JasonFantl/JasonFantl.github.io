@@ -1,7 +1,7 @@
 ---
 title: Infering Physical Topology from Logical
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/InferTopo
+img_path: https:///blog-assets.jasonemerald.workers.dev/InferTopo
 image: cover.png
 math: true
 ---

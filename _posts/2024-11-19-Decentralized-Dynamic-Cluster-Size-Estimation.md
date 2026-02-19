@@ -2,7 +2,7 @@
 
 title: Dynamic Decentralized Cluster Size Estimation  
 categories: [Swarm Intelligence]  
-img_path: https:///bloag-assets.netlify.app/gifs/ClusterSize  
+img_path: https:///blog-assets.jasonemerald.workers.dev/ClusterSize  
 image: cover.png  
 math: true  
 

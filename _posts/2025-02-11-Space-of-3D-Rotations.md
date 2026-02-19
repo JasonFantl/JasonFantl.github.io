@@ -1,7 +1,7 @@
 ---
 title: Rediscovering Quaternions
 categories: []
-img_path: https:///bloag-assets.netlify.app/gifs/3DRotations
+img_path: https:///blog-assets.jasonemerald.workers.dev/3DRotations
 image: cover.jpg
 math: true
 ---

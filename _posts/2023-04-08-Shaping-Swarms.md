@@ -1,7 +1,7 @@
 ---
 title: Shaping Swarms in Simulation
 categories: [Swarm Intelligence]
-img_path: https:///bloag-assets.netlify.app/gifs/ShapingSwarms
+img_path: https:///blog-assets.jasonemerald.workers.dev/ShapingSwarms
 math: true
 image: murmuration.gif
 ---

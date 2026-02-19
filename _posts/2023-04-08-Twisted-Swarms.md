@@ -1,7 +1,7 @@
 ---
 title: Twisted Swarms
 categories: [Swarm Intelligence]
-img_path: https:///bloag-assets.netlify.app/gifs/TwistedSwarms
+img_path: https:///blog-assets.jasonemerald.workers.dev/TwistedSwarms
 math: true
 image: square_avg.gif
 ---
