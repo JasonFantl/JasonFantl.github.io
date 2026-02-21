@@ -1,6 +1,6 @@
 ---
 title: Molecule-Inspired Simulations
-categories: []
+categories: [Physics]
 img_path: https:///blog-assets.jasonemerald.workers.dev/Molecules
 math: true
 ---

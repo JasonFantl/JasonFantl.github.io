@@ -1,6 +1,6 @@
 ---
 title: Cosmologically Unique IDs
-categories: []
+categories: [Swarm Intelligence, Physics]
 img_path: https:///blog-assets.jasonemerald.workers.dev/CUIDs
 image: cover.png
 math: true

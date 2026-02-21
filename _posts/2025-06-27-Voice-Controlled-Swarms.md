@@ -1,6 +1,6 @@
 ---
 title: Voice Controlled Swarms
-categories: []
+categories: [Swarm Intelligence]
 img_path: https:///blog-assets.jasonemerald.workers.dev/voicecontrolledswarms
 image: cover.webp
 math: true

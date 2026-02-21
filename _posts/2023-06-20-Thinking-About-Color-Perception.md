@@ -1,6 +1,6 @@
 ---
 title: Thinking About Color Perception
-categories: []
+categories: [Physics]
 img_path: https:///blog-assets.jasonemerald.workers.dev/Color
 image: cover.png
 math: true

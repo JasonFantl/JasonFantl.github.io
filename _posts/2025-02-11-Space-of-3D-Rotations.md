@@ -1,6 +1,6 @@
 ---
 title: Rediscovering Quaternions
-categories: []
+categories: [Physics]
 img_path: https:///blog-assets.jasonemerald.workers.dev/3DRotations
 image: cover.jpg
 math: true

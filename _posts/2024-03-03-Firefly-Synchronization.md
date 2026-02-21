@@ -2,7 +2,7 @@
 title: Firefly Synchronization
 categories: []
 img_path: https:///blog-assets.jasonemerald.workers.dev/Firefly
-categories: [Swarm Intelligence]
+categories: [Swarm Intelligence, Physics]
 image: cover.webp
 math: true
 ---

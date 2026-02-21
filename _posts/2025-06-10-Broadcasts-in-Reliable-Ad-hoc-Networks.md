@@ -1,6 +1,6 @@
 ---
 title: Broadcasts in Reliable Ad-hoc Networks
-categories: []
+categories: [Swarm Intelligence]
 img_path: https:///blog-assets.jasonemerald.workers.dev/Broadcasts
 image: cover.png
 math: true
