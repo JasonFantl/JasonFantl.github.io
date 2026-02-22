@@ -1,6 +1,6 @@
 ---
 title: What is Entropy?
-categories: []
+categories: [Physics]
 img_path: https:///blog-assets.jasonemerald.workers.dev/Entropy
 image: cover.png
 math: true
