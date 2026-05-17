@@ -300,7 +300,7 @@ It is not used much today since the protocol wastes a lot of time sending RTS/CT
 
 #### Q-CSMA
 
-This is an improvement on CSMA, where the interval you wait before transmitting is based on how much data you have to send (called the queue), so the nodes with a lot of data (a large queue) will get to transmit more often. One such protocol is called [Q-CSMA](https://arxiv.org/pdf/0901.2333), and there are many [similar]((https://web1.eng.famu.fsu.edu/~mingyu/rfs-ton-2010/28-walrand-distributed-csma-TON-2010u.pdf)) [variants](https://dl.acm.org/doi/epdf/10.1145/1811099.1811093).
+This is an improvement on CSMA, where the interval you wait before transmitting is based on how much data you have to send (called the queue), so the nodes with a lot of data (a large queue) will get to transmit more often. One such protocol is called [Q-CSMA](https://arxiv.org/pdf/0901.2333), and there are many [similar](https://web1.eng.famu.fsu.edu/~mingyu/rfs-ton-2010/28-walrand-distributed-csma-TON-2010u.pdf) [variants](https://dl.acm.org/doi/epdf/10.1145/1811099.1811093).
 
 These are not widely deployed as general-purpose protocols today since they optimize for throughput and not latency. If a node has a small amount of data to send, it will have to wait a long time. You can of course modify these protocols to weight the older queues so they are more likely to transmit before getting too old, but this adds additional complexity. A lot of traffic we have today is latency-sensitive, so these variants of CSMA are mostly ignored.
 
