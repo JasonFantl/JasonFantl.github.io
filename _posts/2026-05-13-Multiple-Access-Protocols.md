@@ -28,11 +28,11 @@ The goal was fairly simple: enable all the islands to communicate with the IBM m
 
 One big issue presented itself: If two islands tried to communicate with the base station at the same time, their radio signals would overlap and become indecipherable, exactly the issue our General struggled with when listening to multiple regiments at once.
 
-This is where we introduce the first Multiple Access COntrol protocol, today known as [Pure ALOHA](https://en.wikipedia.org/wiki/ALOHAnet#Pure_ALOHA).
+This is where we introduce the first Multiple Access Control protocol, today known as [Pure ALOHA](https://en.wikipedia.org/wiki/ALOHAnet#Pure_ALOHA).
 
 Take a moment to try and solve the problem yourself. How could the regiments minimize collisions, or at least make sure their message was heard by the General? Later we will see how WiFi solves this issue using a single communication channel, but ALOHA had it easier since it used two frequencies for its protocol. In our army metaphor this can be represented as being able to use both drums and horns, where different instruments can each communicate without interfering with the other instruments.
 
-Below is the algorithm for Pure ALOHA, the first-ever random-access Multiple Access protocol for a wireless computer network.
+Below is the description for Pure ALOHA, the first-ever random-access Multiple Access protocol for a wireless computer network.
 
 ### Pure ALOHA
 
