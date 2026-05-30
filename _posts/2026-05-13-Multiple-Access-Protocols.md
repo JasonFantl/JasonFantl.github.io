@@ -2,7 +2,7 @@
 title: Medium Access Control Protocols
 categories: []
 img_path: https:///blog-assets.jasonemerald.workers.dev/MAC
-image: hawaii-map.png
+image: cover.png
 math: true
 ---
 
