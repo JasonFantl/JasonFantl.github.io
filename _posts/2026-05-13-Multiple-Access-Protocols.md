@@ -16,7 +16,7 @@ Before we look at modern communications, let us travel back to 1969 to the islan
 
 ## ALOHA
 
-On the island of Oʻahu, the main campus of the University of Hawai'i hosted a powerful IBM computer. Nearby community colleges wanted to connect to this powerful computer, but unfortunately these colleges sat on separate islands. Laying down a cable to create a point-to-point network, like the [experimental ARPANet](https://historyofcomputercommunications.info/section/4.0/Overview/) of the time, would have been expensive. So, they decided to use this as the perfect excuse to research implementing a wireless computer network.
+On the island of Oʻahu, the main campus of the University of Hawai'i hosted a powerful IBM computer. Nearby community colleges wanted to connect to this powerful computer, but unfortunately these colleges sat on separate islands. Laying down a cable to create a point-to-point network, like the [experimental ARPAnet](https://historyofcomputercommunications.info/section/4.0/Overview/) of the time, would have been expensive. So, they decided to use this as the perfect excuse to research implementing a wireless computer network.
 
 Thus was born the [ALOHAnet](https://www.eng.hawaii.edu/wp-content/uploads/2020/06/THE-ALOHANET-%E2%80%94-SURFING-FOR-WIRELESS-DATA.pdf).
 
@@ -36,7 +36,7 @@ Below is the description for Pure ALOHA, the first-ever, random-access MAC proto
 
 When you have a message to send, immediately send it. This may collide with someone else, so you need to get back an acknowledgement from the base station (the General) confirming they got your message. We might worry that the acknowledgement message could collide with another message being sent at the same time, but ALOHA uses two frequencies: one for sending messages to the base station, and the other for sending messages from the base station, so the base station's acknowledgment will not collide with incoming messages. This also means that when the base station sends you information, it doesn't need an acknowledgement back.
 
-If you don't get back the acknowledgment (called an ACK) in a short timeframe, try sending the message again. But we need to be careful here. Imagine everyone immediately tries to resend their messages after they fail; what would happen? Two users who just interfered with each other would immediately resend and interfere again! And this would repeat forever. To solve this, you need to wait a random amount of time before resending the message. Eventually, by chance, messages will stop colliding (as long as there arn't too many stations). In the [original paper](https://www.clear.rice.edu/comp551/papers/Abramson-Aloha.pdf) the authors sample their random delay from an exponential distribution, but later we will see how this can be improved. 
+If you don't get back the acknowledgment (called an ACK) in a short timeframe, try sending the message again. But we need to be careful here. Imagine everyone immediately tries to resend their messages after they fail; what would happen? Two users who just interfered with each other would immediately resend and interfere again! And this would repeat forever. To solve this, you need to wait a random amount of time before resending the message. Eventually, by chance, messages will stop colliding (as long as there aren't too many stations). In the [original paper](https://www.clear.rice.edu/comp551/papers/Abramson-Aloha.pdf) the authors sample their random delay from an exponential distribution, but later we will see how this can be improved. 
 
 Below is a simulation of Pure ALOHA with three stations talking to a base station. Stations will begin a backoff immediately after sending a message, with a minimum delay to allow for an ACK to be sent back, in which case they cancel their backoff.
 
@@ -50,9 +50,9 @@ We denote a message being sent from a station as a colored bar with full height,
 
 Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tree/main/ALOHA/sketch).
 
-We see when a station sends a message, the base station decodes it, then sends back an ACK. When two stations send messages that overlap, the base station is unable to read either (think the General hearing two drums at the same time) and the ACK is not sent back. When we see all the stations try to send a message at around the same time, notice it is harder for each message to be lucky enough to finish before another starts. We also see at one point an overlap between the ACK and the message from station C, but nothing interferes. This is because the stations are sending on a different frequency then the base station, so messages between the two do not interfere.
+We see when a station sends a message, the base station decodes it, then sends back an ACK. When two stations send messages that overlap, the base station is unable to read either (think the General hearing two drums at the same time) and the ACK is not sent back. When we see all the stations try to send a message at around the same time, notice it is harder for each message to be lucky enough to finish before another starts. We also see at one point an overlap between the ACK and the message from station C, but nothing interferes. This is because the stations are sending on a different frequency than the base station, so messages between the two do not interfere.
 
-The protocol worked! Although, it's not very efficient. You can look at the [original paper](https://www.eng.hawaii.edu/wp-content/uploads/2020/06/abramson19xx-THE-ALOHA-SYSTEM%E2%80%94Another-alternative-for-computer-communications.pdf) to see that they calculate the efficiency of this algorithm to be 18.6% of the theoretical optimal throughput. They also calculate that the network can only handle up to 324 users, after which, there is so much interference that not a single message can make it to the base station. But typical traffic for ALOHA was small enough that this protocol was sufficient.
+The protocol worked! Although, it's not very efficient. You can look at the [original paper](https://www.eng.hawaii.edu/wp-content/uploads/2020/06/abramson19xx-THE-ALOHA-SYSTEM%E2%80%94Another-alternative-for-computer-communications.pdf) to see that they calculate the efficiency of this algorithm to be 18.4% of the theoretical optimal throughput (the paper has a typo of 18.6%). They also calculate that the network can only handle up to 324 users, after which, there is so much interference that not a single message can make it to the base station. But typical traffic for ALOHA was small enough that this protocol was sufficient.
 
 This was followed by many improvements, such as using [slotted ALOHA](https://dl.acm.org/doi/pdf/10.1145/1024916.1024920), which increased the throughput to 36.8% efficiency by using time slots. And these improvements only [continued](https://en.wikipedia.org/wiki/ALOHAnet#Protocol). But more interesting was the development that ALOHA inspired in other mediums.
 
@@ -60,7 +60,7 @@ This was followed by many improvements, such as using [slotted ALOHA](https://dl
 
 Immediately after the success of ALOHAnet, it was recognized that a similar protocol could be created for wired networks. In fact, this similar protocol would be adaptable to any medium that can carry a signal. This new protocol was called Ethernet, inspired by the historical concept of the luminiferous ether. This protocol would allow any number of computers to talk to each other over any medium, such as through air, water, or a wire.
 
-Typically, Ethernet uses a single wire that every computer connects over, and every node is treated equal. Lack of a leader makes coordinating devices much harder, but a single wire makes it easier for nodes to monitor what is happening on the network. This physical medium was novel compared to what previous networks had been built for. To compare: ARPAnet, the precursor to the internet, used a directional wired point-to-point connection between each device, so messages never interfered, but messages had to be routed through a complex network of devices. ALOHAnet used a wireless connection to a central base station, which meant nodes could be coordinated by a central coordinator, but they couldn't tell what other nodes were hearing. Because of all these differences, Ethernet was able to utilize different new compared to these previous networks.
+Typically, Ethernet uses a single wire that every computer connects over, and every node is treated equal. Lack of a leader makes coordinating devices much harder, but a single wire makes it easier for nodes to monitor what is happening on the network. This physical medium was novel compared to what previous networks had been built for. To compare: ARPAnet, the precursor to the internet, used a directional wired point-to-point connection between each device, so messages never interfered, but messages had to be routed through a complex network of devices. ALOHAnet used a wireless connection to a central base station, which meant nodes could be coordinated by a central coordinator, but they couldn't tell what other nodes were hearing. Because of all these differences, Ethernet was able to utilize new methods compared to these previous networks.
 
 Here's how you would set up an Ethernet network: Lay a cable around the room, then [clamp](https://en.wikipedia.org/wiki/Vampire_tap) each computer onto the cable. That's it; you now have a functioning network. Unfortunately, we must again solve the issue of coordinating all the computers so they don't talk over each other.
 
@@ -70,11 +70,11 @@ Computers on the wire can listen to the wire at the same time as they transmit o
 
 Because we know everyone is hearing the same thing, we can wait until the wire is quiet before we talk (this wouldn't be as useful in ALOHAnet since we don't know what the base station is hearing). This listening before transmitting is known as [Carrier Sense Multiple Access](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access) (CSMA) and reduces the likelihood of collisions in Ethernet. It does not eliminate them though.
 
-Just like ALOHAnet, users need to wait a random amount of time after the wire becomes free in order to avoid all talking at once. Sampling that delay from an exponential distribution, as ALOHANet did, would be sub-optimal. Imagine we had a million computers on the network; the likelihood that at least two computers would pick roughly the same delay would be extremely high and the collisions may never end. Ideally, we scale our delay by the size of the network. We could develop a complicated protocol to track the number of computers on the network to do this, but there is a more elegant solution.
+Just like ALOHAnet, users need to wait a random amount of time after the wire becomes free in order to avoid all talking at once. Sampling that delay from an exponential distribution, as ALOHAnet did, would be sub-optimal. Imagine we had a million computers on the network; the likelihood that at least two computers would pick roughly the same delay would be extremely high and the collisions may never end. Ideally, we scale our delay by the size of the network. We could develop a complicated protocol to track the number of computers on the network to do this, but there is a more elegant solution.
 
 Ethernet developed [exponential random backoff](http://en.wikipedia.org/wiki/Exponential_backoff#Collision_avoidance) where, instead of sampling from a static distribution, it samples from a uniform interval that doubles each time a collision occurs, and then resets after a successful send. This scales the backoff interval to the size of the network dynamically, adapting to computers being added or removed from the network. Be careful to watch out for the [channel capture effect](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_detection#Channel_capture_effect), where one node with a large backoff gets starved out of access to the wire by other nodes with small backoffs.
 
-Ethernet's final improvement was to detect collisions immediately. If we listen to the wire while we are transmitting, we can compare what we are sending to what we are hearing. If they are different, then we immediately know a collision just occurred. This is necessary since there isn't a base station anymore to tell us if a collision occurred. With the ability for immediate detection, the protocol is appended to be called [Carrier-sense Multiple Access with Collision Detection](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_detection) (CSMA/CD).
+Ethernet's final improvement was to detect collisions immediately. If we listen to the wire while we are transmitting, we can compare what we are sending to what we are hearing. If they are different, then we immediately know a collision just occurred. This is necessary since there isn't a base station anymore to tell us if a collision occurred. With the ability for immediate detection, the protocol is amended to be called [Carrier-sense Multiple Access with Collision Detection](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_detection) (CSMA/CD).
 
 The Ethernet cable has a small delay, so it would be possible for a node to transmit a short message and not hear that a collision occurred until after it finished transmitting, which would not be caught by CSMA/CD. So, Ethernet requires that a message must be broadcast for at least as long as a message takes to make a round-trip along the wire. This message size is typically called the Minimum Ethernet Frame Size.
 
@@ -88,7 +88,7 @@ Here we see a simulation of Ethernet with three computers. We exaggerate the del
 
 Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tree/main/Ethernet/sketch).
 
-Notice that there are no ACKs, just messages. We also see how nodes immediately handle collisions rather then waiting to see if their messages were received correctly.
+Notice that there are no ACKs, just messages. We also see how nodes immediately handle collisions rather than waiting to see if their messages were received correctly.
 
 It is important to note that what we call Ethernet today is nothing like what is described above, so we should mentally separate classic Ethernet and modern Ethernet as completely different protocols. Modern Ethernet uses direct point-point wires connecting devices to switches that route messages between devices, so no collisions need to be handled.
 
@@ -96,7 +96,7 @@ As powerful as classic Ethernet was, wired networks have physical limitations, m
 
 ## WiFi
 
-It took a while to get WiFi as fast as Ethernet, but after some deregulation and hardware improvements, WiFi went commercial in 1999. If you consider the WiFi network in your home, you may realize that this is a return to the scenario of a central base station wirelessly communicating with users, exactly like we had in Hawai'i's ALOHANet.
+It took a while to get WiFi as fast as Ethernet, but after some deregulation and hardware improvements, WiFi went commercial in 1999. If you consider the WiFi network in your home, you may realize that this is a return to the scenario of a central base station wirelessly communicating with users, exactly like we had in Hawai'i's ALOHAnet.
 
 If we wanted to, we could just reuse the ALOHA protocol for WiFi. But because of hardware advances, regulatory constraints, and the intended use case for WiFi, it would benefit from a whole new protocol. The largest constraint is that WiFi only uses a single frequency for each router.
 
@@ -110,7 +110,7 @@ Users will send messages to the router and wait for an ACK, and if an ACK is not
 
 We can dramatically reduce collisions by using CSMA, which, as a reminder, means a node will listen to make sure the channel is free before transmitting, then wait a random delay using exponential backoff. Because of self-interference, we can't tell if our transmission had a collision, so we must wait for an ACK from the base station to determine if a collision happened or not. This is called [Carrier-sense Multiple Access with Collision Avoidance](https://en.wikipedia.org/wiki/Carrier-sense_multiple_access_with_collision_avoidance) (CSMA/CA).
 
-This collision avoidance has room for a further improvement. If nodes wait a small delay before and after the channel is free, in addition to the exponential backoff, this gives the base station some time to reply without interference. This delay time is called the [Distributed Coordination Function Interframe Space](https://en.wikipedia.org/wiki/DCF_Interframe_Space) (DIFS). Since the ACK is sent from the router immediately after a message is received (the router does not use this additional delay), DIFS essentially gives the routers ACK a priority in the network and (nearly) guarantees that no one else will transmit over it.
+This collision avoidance has room for a further improvement. If nodes wait a small delay before and after the channel is free, in addition to the exponential backoff, this gives the base station some time to reply without interference. This delay time is called the [Distributed Coordination Function Interframe Space](https://en.wikipedia.org/wiki/DCF_Interframe_Space) (DIFS). Since the ACK is sent from the router immediately after a message is received (the router does not use this additional delay), DIFS essentially gives the router's ACK a priority in the network and (nearly) guarantees that no one else will transmit over it.
 
 This is how WiFi operates in most of our homes today.
 
@@ -134,14 +134,14 @@ We see that B starts sending a message to the base station and A has no idea. In
 
 This problem shows up in many communication scenarios, not just packet-based networks (networks that split messages into small packets) like the ones we have been looking at. Here are two examples of where the Hidden Node problem causes very serious problems in analog networks (networks that send the entire message at once and decode it in real time).
 
-* Pilots talk to a command tower over shared analog channels, so sometimes their communications interfere. You can tell when this happens because the audio becomes a squeal (this is what interference sounds like). This can cause critical information to be lost, such as we saw in the [deadliest accident in aviation history](https://en.wikipedia.org/wiki/Tenerife_airport_disaster), where two pilots talked over a shared channel at the same time, causing interference and warnings to go unheard, which was one of the many contributing factors to the disaster. This is still a problem [today](https://aviationweek.com/business-aviation/safety-ops-regulation/crosscheck-stepped-radio-transmissions).
+* Pilots talk to a control tower over shared analog channels, so sometimes their communications interfere. You can tell when this happens because the audio becomes a squeal (this is what interference sounds like). This can cause critical information to be lost, such as we saw in the [deadliest accident in aviation history](https://en.wikipedia.org/wiki/Tenerife_airport_disaster), where two pilots talked over a shared channel at the same time, causing interference and warnings to go unheard, which was one of the many contributing factors to the disaster. This is still a problem [today](https://aviationweek.com/business-aviation/safety-ops-regulation/crosscheck-stepped-radio-transmissions).
 * Walkie-talkies use a single analog channel and are also prone to the Hidden Node problem. Again, this is a technology used in high-stakes scenarios such as firefighting and search and rescue. Unfortunately, in these scenarios, mountains and buildings are a common obstacle, increasing the likelihood of the Hidden Node problem.
 
 Now back to WiFi. Our CSMA/CA protocol does not account for collisions due to the Hidden Node problem. To solve this, the base station (who can hear and talk to all the nodes) will pick one node at a time and tell all the other nodes to be quiet. The selected node can talk for a few moments, then the router picks the next node. In order to choose which node to select, the router picks the first node that sends it a request (read as the first request that didn't collide). Here's how that looks in more detail.
 
 Nodes wait for the channel to be free (CSMA), wait a tiny window (DIFS) to let ACKs take priority, wait some random time to avoid all talking at once (exponential random backoff), then finally send a tiny Request-To-Send (RTS) packet to the base station. The base station will accept the first valid RTS packet it receives, then send back a Clear-To-Send (CTS) packet. When nodes hear a CTS or RTS packet unrelated to them, they will know they were not the first node to make a request and will wait until the next time they can make a request, determined by a time specified in the packet (this is called [Network Allocation Vector](https://en.wikipedia.org/wiki/Network_allocation_vector) (NAV)). When a node gets a CTS meant for them, they will transmit their data for the allotted time.
 
-Below is a simulation of WiFi with RTS/CTS. Watch how node A uses a CTS+NAV backoff to track when the router is occupied, even though node A can't hear the transmission from node B. Using the NAV to detect traffic outside a nodes range of hearing is called virtual carrier-sensing.
+Below is a simulation of WiFi with RTS/CTS. Watch how node A uses a CTS+NAV backoff to track when the router is occupied, even though node A can't hear the transmission from node B. Using the NAV to detect traffic outside a node's range of hearing is called virtual carrier-sensing.
 
 <div style="text-align: center;">
   <video controls autoplay muted loop playsinline width="75%">
@@ -153,7 +153,7 @@ Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tr
 
 We see that hidden nodes A and B avoided colliding, unlike previously. This is because of the NAV virtual carrier-sensing, where node A can now detect when node B is sending. Note that this reduces, but does not eliminate, the Hidden Node problem. RTS and CTS packets can still collide, as we see when all the nodes attempt to transmit at once and the RTS packet of node A and B collide. 
 
-Hidden node issues should now be regulated to just the RTS/CTS packets (ignoring nodes just joining a network for the first time), and small packets are less likely to collide and can recover faster, so we should expect much smaller intervals of interference. We essentially just shrunk the interval of time in which the Hidden Node problem can occur.
+Hidden node issues should now be relegated to just the RTS/CTS packets (ignoring nodes just joining a network for the first time), and small packets are less likely to collide and can recover faster, so we should expect much smaller intervals of interference. We essentially just shrunk the interval of time in which the Hidden Node problem can occur.
 
 But oftentimes RTS/CTS is turned off on your router, as plain old CSMA/CA does well enough, and the overhead of RTS/CTS can sometimes outweigh the benefits it provides.
 
@@ -171,7 +171,7 @@ So now let's place hundreds of routers throughout the stadium. We'll also lower 
 
 ![](3color.png){: .center w="300" }
 
-This is sufficient, but there is still some interference from the phones in one cell transmitting loud enough to interfere with far-away cells of the same frequency. We turned down the routers power to avoid the interference, but peoples cell phones don't do this. The more recent 5 GHz WiFi has 19 non-overlapping channels, which means we can be more clever with our channel assignments, maximizing the distance between cells of the same color. We could also assign those 19 channels to load balance the cells or to avoid environmental interference; there are a lot of ways you might assign these frequencies. This is called the Frequency Assignment Problem, and there [are](https://www.researchgate.net/publication/377181699_Towards_Optimal_Frequency_Plans_A_Survey_of_Frequency_Assignment_Strategies_Models_and_Methods) [many](https://www.sciencedirect.com/science/article/pii/0012365X9500225L) [solutions](https://webdoc.sub.gwdg.de/ebook/e/2003/zib_2/reports/ZR-01-40.pdf). You could pretty easily invent some for yourself (I recommend looking into the related problem of the [Four Color Theorem](https://en.wikipedia.org/wiki/Four_color_theorem) if you do). More sophisticated assignment algorithms might even dynamically assign channels to do load balancing and avoid interference in real time.
+This is sufficient, but there is still some interference from the phones in one cell transmitting loud enough to interfere with far-away cells of the same frequency. We turned down the routers power to avoid the interference, but people's cell phones don't do this. The more recent 5 GHz WiFi has 19 non-overlapping channels, which means we can be more clever with our channel assignments, maximizing the distance between cells of the same color. We could also assign those 19 channels to load balance the cells or to avoid environmental interference; there are a lot of ways you might assign these frequencies. This is called the Frequency Assignment Problem, and there [are](https://www.researchgate.net/publication/377181699_Towards_Optimal_Frequency_Plans_A_Survey_of_Frequency_Assignment_Strategies_Models_and_Methods) [many](https://www.sciencedirect.com/science/article/pii/0012365X9500225L) [solutions](https://webdoc.sub.gwdg.de/ebook/e/2003/zib_2/reports/ZR-01-40.pdf). You could pretty easily invent some for yourself (I recommend looking into the related problem of the [Four Color Theorem](https://en.wikipedia.org/wiki/Four_color_theorem) if you do). More sophisticated assignment algorithms might even dynamically assign channels to do load balancing and avoid interference in real time.
 
 Even with the additional channels and sophisticated assignment algorithms, stadiums can still suffer from users' devices interfering with the other routers in the stadium on the same channel. So people developed a more practical solution. They decided to place the routers underneath the seats, using human bodies to dampen the signals. This is quite clever. Interference grows with the number of people in the stadium, and now the dampening mechanism also scales with the number of people in the stadium. With this knowledge, now you know if you need a better signal in a stadium, you should probably bring your phone as low as possible.
 
@@ -210,9 +210,9 @@ We now look at a far more difficult environment, that of ad-hoc (no infrastructu
 
 ## Mesh
 
-Mesh networks are the most difficult networks to design for as they are the most general. If you don't have any infrastructure, such as cell towers or fiber optic cables or WiFi routers, then the devices themselves manage the network. Often times, devices will move, or join or leave the network at anytime. Since mesh networks are built to operate under these harsh constraints, they are often very useful in harsh environments such as outerspace or battlefields.
+Mesh networks are the most difficult networks to design for as they are the most general. If you don't have any infrastructure, such as cell towers or fiber optic cables or WiFi routers, then the devices themselves manage the network. Oftentimes, devices will move, or join or leave the network at any time. Since mesh networks are built to operate under these harsh constraints, they are often very useful in harsh environments such as outer space or battlefields.
 
-Imagine a space mission to a new planet, infrastructure would be hard to set up initially, so a mesh network would be helpful. Or if you want a backup network in case the primary one fails in a natural disaster or gets shutdown by a government, a mesh network can be spun up anywhere at anytime. If you need to suddenly perform a search-and-rescue mission for people stuck in a cave system, then an ad-hoc network is essentially the only option you have. Or maybe you just want a quick network for your music festival in the middle of the desert.
+Imagine a space mission to a new planet, infrastructure would be hard to set up initially, so a mesh network would be helpful. Or if you want a backup network in case the primary one fails in a natural disaster or gets shutdown by a government, a mesh network can be spun up anywhere at any time. If you need to suddenly perform a search-and-rescue mission for people stuck in a cave system, then an ad-hoc network is essentially the only option you have. Or maybe you just want a quick network for your music festival in the middle of the desert.
 
 In our regiment metaphor this would look like we removed the General and now regiments have to communicate among themselves.
 
@@ -222,7 +222,7 @@ Let's start at the beginning, which as usual, is with DARPA.
 
 ### DARPA SURAN Project
 
-in 1973, DARPA funded its first mesh networking project, called The Packet Radio Network (PRNET), followed by the [Survivable, Adaptive Networks](https://en.wikipedia.org/wiki/SURAN) (SURAN) Program, which then branched into [a number of different programs](https://thelastmile.forterra.com/how-the-u-s-military-helped-develop-mobile-mesh-networking/). SURAN was an ambitious program to create mesh networks for the battlefield for a large number of nodes. Its purpose is well stated in [its paper](https://ieeexplore.ieee.org/document/117536), which said
+In 1973, DARPA funded its first mesh networking project, called The Packet Radio Network (PRNET), followed by the [Survivable, Adaptive Networks](https://en.wikipedia.org/wiki/SURAN) (SURAN) Program, which then branched into [a number of different programs](https://thelastmile.forterra.com/how-the-u-s-military-helped-develop-mobile-mesh-networking/). SURAN was an ambitious program to create mesh networks for the battlefield for a large number of nodes. Its purpose is well stated in [its paper](https://ieeexplore.ieee.org/document/117536), which said
 
 > DARPA sponsored the Survivable, Adaptive Networks (SURAN) Program to research and develop network technology capable of supporting communication between computers and their users in the modern battlefield. This environment possesses characteristics that in the past have been incompatible with reliable communication, such as large numbers (thousands) of nodes, dynamics (mobile nodes, node failures, changing traffic demands), and sophisticated attempts to disrupt the network (intelligent jamming, message modification).
 
@@ -248,21 +248,29 @@ In these networks there is one device which is the "main" device, such as the ce
 
 This is classic Bluetooth, and it is not actually a mesh network. You can see that it has the same structure as WiFi. It does differ from WiFi by exchanging complexity for power efficiency, as we'll see below. 
 
-Whoever initiates the Bluetooth connection is the master device, although the role can be re-negotiated later. New nodes can be added by pausing the piconet and having the master send out connection requests, which potential nodes will respond to using random backoff. This means for establishing links Pure ALOHA is used by uer request.
+Whoever initiates the Bluetooth connection is the master device, although the role can be re-negotiated later. New nodes can be added by pausing the piconet and having the master send out connection requests, which potential nodes will respond to using random backoff. This means establishing links is done using Pure ALOHA initiated by user request.
 
-For typical communication, Bluetooth devices use very small frames where the master will send a packet to a slave, then the slave can send a packet back. The schedule for who to talk to is determined by the master ID and a sequence number, which means all the nodes in the network can deterministically generate the schedule. Just like with the cell towers, a schedule removes the possibility of collisions. The master can schedule devices however it likes, but commonly it will use round-robin. This is the power-intensive component of a Bluetooth network.
+For typical communication, Bluetooth devices use very small frames where the master will send a packet to a slave, then the slave can send a packet back. The schedule for who can talk is determined by the master device, which will commonly use round-robin. This is the power-intensive component of a Bluetooth network. Note that because Bluetooth uses this call-response method, no collisions are possible (except for joining).
 
-Bluetooth does have one funny feature, where [each frame is sent over a different channel](https://en.wikipedia.org/wiki/Frequency-hopping_spread_spectrum). The master chooses one out of 79 channels 1600 times a second, sending out the channel schedule so slaves know what channels to listen on. This is called [frequency-hopping spread spectrum](https://en.wikipedia.org/wiki/Frequency-hopping_spread_spectrum). The reason it does this is to avoid interference. Bluetooth operates on the same frequencies as WiFi, so your earbuds might be interfering with your WiFi connection. But with adaptive frequencies hopping, Bluetooth will monitor each channel and dynamically avoid the noisy ones.
+Bluetooth does have one funny feature, where [each frame is sent over a different channel](https://en.wikipedia.org/wiki/Frequency-hopping_spread_spectrum). The data will be sent out over one of 79 channels 1600 times a second. The schedule for the frequency is determined by the master device ID and the clock. New nodes can determine the schedule by listening for the current time and the master ID. This is called [frequency-hopping spread spectrum](https://en.wikipedia.org/wiki/Frequency-hopping_spread_spectrum). The reason it does this is to avoid interference. Bluetooth operates on the same frequencies as WiFi, so your earbuds might be interfering with your WiFi connection. But with adaptive frequency hopping, Bluetooth will monitor each channel and the master device will dynamically avoid the noisy ones.
 
-Let's look at a real mesh Medium Access Control protocol.
+Let's look at a real mesh MAC protocol.
+
+#### Bluetooth Mesh
+
+Bluetooth introduced a different protocol for mesh networks, called [Bluetooth Mesh](https://www.mdpi.com/1424-8220/18/8/2409). Instead of small piconets with master and slave devices, we have an arbitrary number of nodes all talking to each other as equals. Bluetooth Mesh runs off the Bluetooth Low Energy (BLE) Link Layer architecture, which we will look at here.
+
+BLE uses 3 channels (for advertizing mode, which is the primary mode used) and assumes minimal traffic (for example, a message to turn a lightbulb off). The protocol is simple: Wait a random amount of time (0-2 milliseconds) and then send the packet on every channel. Repeat this a few times (sometimes 3 times, but configurable on each node) to increase the chance that neighboring nodes receive the packet. No ACKs, CSMA, or collision avoidance of any kind.
+
+This repetition is the only attempt to avoid collisions. This is sufficient in low-communication networks, but you can imagine how this quickly fails in large networks or for heavy traffic.
 
 #### Zigbee
 
 Sensor networks are common in warehouses or smart homes or smart cities, and they also have unique network characteristics. [Many protocols](https://www.eecs.northwestern.edu/~peters/references/MACSurveryNaik04.pdf) have been developed for this environment, Zigbee being one commercial example.
 
-Zigbee uses CSMA/CA, nearly identical to WiFi. Sending from one node to another matches the behavior we saw with WiFi, but it differs in that nodes in Zigbee can also send out a broadcast to all neighbors, which unfortunately means it can't tell if there was a collision, as some may have collided while other did not. This means that we can confirm messages from point-to-point, but not for broadcasts.
+Zigbee uses CSMA/CA, nearly identical to WiFi. Sending from one node to another matches the behavior we saw with WiFi, but it differs in that nodes in Zigbee can also send out a broadcast to all neighbors, which unfortunately means it can't tell if there was a collision, as some may have collided while others did not. This means that we can confirm messages from point-to-point, but not for broadcasts.
 
-Zigbee also has additional features built on top of the Medium Access Control protocol to allow devices to save energy by putting the device to sleep. You can imagine this means that the network is fairly dynamic, with nodes turning on and off fairly consistently. 
+Zigbee also has additional features built on top of the MAC protocol to allow devices to save energy by putting the device to sleep. You can imagine this means that the network is fairly dynamic, with nodes turning on and off fairly consistently.
 
 And now let's look at an example of a more extreme environment.
 
@@ -272,7 +280,7 @@ Some radios are long-range (LoRa) and extremely low power, often used for sendin
 
 Because of the heavy emphasis on power management, devices will often turn off for long periods of time in between transmissions. This means managing a complex protocol is not feasible. Fortunately, because of the slow traffic, you often will not get collisions, even if you send at random.
 
-LoRa-based networks will almost always use an ALOHA channel, just sending when there is data to send and waiting for an ACK, resending on a timeout. Sometimes the ACk is optional, such as in one of the more popular LoRa protocols: LoRaWAN.
+LoRa-based networks will almost always use an ALOHA channel, just sending when there is data to send and waiting for an ACK, resending on a timeout. Sometimes the ACK is optional, such as in one of the more popular LoRa protocols: LoRaWAN.
 
 Often in these extreme situations, simplicity is the best answer.
 
@@ -286,7 +294,7 @@ Can you design a better protocol for talking over trucking radios, or justify wh
 
 ### VANETs
 
-Vehicular ad-hoc networks (VANETs) typically use a MAC protocol nearly identical to Wifi, where CSMA/CA is used with RTS/CTS packets. This does not handle the Hidden Node problem well since it is using the WiFi protocol in a dense mesh environment. This is a known limitation of the current implementation, but TDMA-based solutions are now [being explored](https://www.mdpi.com/1424-8220/20/23/6709).
+Vehicular ad-hoc networks (VANETs) typically use a MAC protocol nearly identical to WiFi, where CSMA/CA is used with RTS/CTS packets. This does not handle the Hidden Node problem well since it is using the WiFi protocol in a dense mesh environment. This is a known limitation of the current implementation, but TDMA-based solutions are now [being explored](https://www.mdpi.com/1424-8220/20/23/6709).
 
 ### Other Medium Access Control Protocols
 
@@ -296,7 +304,7 @@ Here are some ideas that are either old and no longer around today, or too new o
 
 For different kinds of traffic you can layer multiple protocols next to each other, separated across channels or time. For example, [hybrid TDMA-CSMA](https://arxiv.org/html/2509.06119) splits the protocol into two time slots, a TDMA and CSMA slot. Different slots allows different traffic types to use the most appropriate protocol depending on if it is small bursty traffic or a large transmission.
 
-This can be useful if you realize your traffic patterns contain multiple traffic types. You are not restrited to using a single protocol for a situation.
+This can be useful if you realize your traffic patterns contain multiple traffic types. You are not restricted to using a single protocol for a situation.
 
 #### MACA
 
@@ -320,7 +328,7 @@ This does have some subtlety, like how to implement a busy tone in place of send
 
 This is an outdated protocol since it essentially wastes a full channel that might otherwise be used for increasing throughput.
 
-These were all outdated protocols, let's take a look at some very recent Medium Access Control protocols for mesh networks.
+These were a lot of outdated protocols, let's take a look at some very recent Medium Access Control protocols for mesh networks.
 
 #### DDMC-TDMA
 
