@@ -50,7 +50,7 @@ We denote a message being sent from a station as a colored bar with full height,
 
 Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tree/main/ALOHA/sketch).
 
-We see when a station sends a message, the base station decodes it, then sends back an ACK. When two stations send messages that overlap, the base station is unable to read either (think the General hearing two drums at the same time) and the ACK is not sent back. When we see all the stations try to send a message at around the same time, notice it is harder for each message to be lucky enough to finish before another starts. We also see at one point an overlap between the ACK and the message from station C, but nothing interferes. This is because the stations are sending on a different frequency than the base station, so messages between the two do not interfere.
+We see when a station sends a message, the base station decodes it, then sends back an ACK. When two stations send messages that overlap, the base station is unable to read either (think the General hearing two drums at the same time) and the ACK is not sent back. When we see all the stations try to send a message at around the same time, notice it is harder for each message to be lucky enough to finish before another starts. We also see at one point an overlap between the ACK from C and the message from B, but nothing interferes. This is because the stations are sending on a different frequency than the base station, so messages between the two do not interfere.
 
 The protocol worked! Although, it's not very efficient. You can look at the [original paper](https://www.eng.hawaii.edu/wp-content/uploads/2020/06/abramson19xx-THE-ALOHA-SYSTEM%E2%80%94Another-alternative-for-computer-communications.pdf) to see that they calculate the efficiency of this algorithm to be 18.4% of the theoretical optimal throughput (the paper has a typo of 18.6%). They also calculate that the network can only handle up to 324 users, after which, there is so much interference that not a single message can make it to the base station. But typical traffic for ALOHA was small enough that this protocol was sufficient.
 
@@ -122,7 +122,7 @@ This is how WiFi operates in most of our homes today.
 
 Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tree/main/WiFi/sketch).
 
-We see how B and C can hear each other, so when B has a message to send, it knows to wait until C is done. But we see how when A and B both need to send, there is a collision, as they can't hear each other. WiFi works better when all the devices can hear all the other devices. If you find your router running slow due to this issue, known as the Hidden Node problem, there is an additional setting you can turn on in your router, known as RTS/CTS, which we explore next. 
+We see how B and C can hear each other, so when B has a message to send, it knows to wait until C is done. But when A and C both need to send, there is a collision, as they can't hear each other. WiFi works better when all the devices can hear all the other devices. If you find your router running slow due to this issue, known as the Hidden Node problem, there is an additional setting you can turn on in your router, known as RTS/CTS, which we explore next. 
 
 ### Hidden nodes
 
@@ -151,7 +151,7 @@ Below is a simulation of WiFi with RTS/CTS. Watch how node A uses a CTS+NAV back
 
 Code for the animation is [here](https://github.com/JasonFantl/MAC-animations/tree/main/WiFi-RTS/sketch).
 
-We see that hidden nodes A and B avoided colliding, unlike previously. This is because of the NAV virtual carrier-sensing, where node A can now detect when node B is sending. Note that this reduces, but does not eliminate, the Hidden Node problem. RTS and CTS packets can still collide, as we see when all the nodes attempt to transmit at once and the RTS packet of node A and B collide. 
+We see that hidden nodes A and C now avoid colliding, unlike previously. This is because of the NAV virtual carrier-sensing, where node A can now detect when node C is sending. Note that this reduces, but does not eliminate, the Hidden Node problem. RTS and CTS packets can still collide, as we see when all the nodes attempt to transmit at once and the RTS packet of node A and B collide. 
 
 Hidden node issues should now be relegated to just the RTS/CTS packets (ignoring nodes just joining a network for the first time), and small packets are less likely to collide and can recover faster, so we should expect much smaller intervals of interference. We essentially just shrunk the interval of time in which the Hidden Node problem can occur.
 
